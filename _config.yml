@@ -25,8 +25,8 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 markdown: kramdown
 theme: minima
 #remote_theme: wild-flame/jekyll-simple
-plugins:
-  - jekyll-feed
+#plugins:
+#  - jekyll-feed
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
