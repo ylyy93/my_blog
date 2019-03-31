@@ -2,7 +2,7 @@
 layout: post
 title: Shortcut to Creating a New Post in Jekyll
 date: 2019-03-31 14:38 -0600
-categories: Dev
+categories: Tech
 tags: [jekyll]
 ---
 

@@ -2,7 +2,8 @@
 layout: post
 title:  "Deploy a website on Gibhub with Jekyll"
 date:   2019-03-31 12:27:57 -0600
-categories: [jekyll]
+categories: Tech
+tags: [jekyll]
 ---
 
 ## Create a new website
