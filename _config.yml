@@ -73,7 +73,7 @@ tag_page: '/blog/tags/'
 category_page: '/blog/categories/'
 
 hero:
-  image: /public/img/we_will_be_giants_by_yalestewart.jpg
+  image: /public/img/snow.jpg
   #caption: Original Artwork &copy; <a href="http://yalestewart.deviantart.com/art/We-Will-Be-Giants-370176475">Yale Stewart</a>
 
 # Puglins
@@ -82,10 +82,6 @@ google_analytics_token: 'UA-133333635-1' # leave blank if you don't want google 
 disqus_short_name: '' # leave blank if you don't want disqus
 
 
-#theme: jekyll-theme-hacker
-#remote_theme: wild-flame/jekyll-simple
-#plugins:
-#  - jekyll-feed
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
