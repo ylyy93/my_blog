@@ -6,4 +6,4 @@ layout: default
 title: Home
 ---
 
-![](/img/snow.png)
+![snow](/img/snow.png)
