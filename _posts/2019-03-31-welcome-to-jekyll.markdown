@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "Deploy a website on Gibhub with Jekyll"
 date:   2019-03-31 12:27:57 -0600
 categories: jekyll update
 ---
@@ -13,20 +13,41 @@ bundle exec jekyll serve
 {% endhighlight %}
 
 ## Deploy a website on github
+First, create a new repository `my_blog` on Github without creating README file.
+
+Then, modify the `_config.yml` file in the folder my_blog.
 
 {% highlight ruby %}
 cd my_blog/
 vim _config.yml
 {% endhighlight %}
-Change baseurl to
+
+Change `baseurl` to
+
 {% highlight ruby %}
-baseurl: "my_blog"
+baseurl: "/my_blog"
 {% endhighlight %}
 
+{% highlight ruby %}
+git init
+git checkout -b gh-pages
+git status
+git add .
+git commit -m "initial commit"
+git remote add origin https://github.com/ylyy93/my_blog.git
+git push origin gh-pages
+{% endhighlight %}
 
+If the [permission is denied][] (due to multiple github accounts), try the following. You might be asked to enter your github account password.
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+{% highlight ruby %}
+git config -l | grep url
+git remote set-url origin "https://ylyy93@github.com/ylyy93/my_blog.git"
+git config -l | grep url
+git push origin gh-pages
+{% endhighlight %}
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+Check out the [awesome tutorial ][awesome-tutorial] on Youtube.
+
+[awesome-tutorial]: https://www.youtube.com/watch?v=fqFjuX4VZmU&list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB&index=19
+[denied-permission]: https://www.a2hosting.com/kb/developer-corner/version-control-systems1/403-forbidden-error-message-when-you-try-to-push-to-a-github-repository
