@@ -6,4 +6,4 @@ layout: default
 title: Home
 ---
 
-![](ylyy93.github.io/img/snow.png)
+![](/img/snow.png)
