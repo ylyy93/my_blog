@@ -78,6 +78,12 @@ Run the following chunk every time you make changes to your website.
 ./deploy.sh
 {% endhighlight %}
 
+If you want to check out your website locally and debug, use
+{% highlight ruby %}
+jekyll serve
+{% endhighlight %}
+
+
 Check out the [awesome tutorial ][awesome-tutorial] on Youtube.
 
 [awesome-tutorial]: https://www.youtube.com/watch?v=fqFjuX4VZmU&list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB&index=19
