@@ -23,7 +23,7 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
 markdown: kramdown
-theme: minima
+theme: minimal-mistakes-jekyll
 #theme: jekyll-theme-hacker
 #remote_theme: wild-flame/jekyll-simple
 #plugins:
