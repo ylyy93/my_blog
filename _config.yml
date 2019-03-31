@@ -16,14 +16,72 @@
 title: ylyy's Website
 email: ""
 description: "" # this means to ignore newlines until "baseurl:"
-baseurl: "/my_blog" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://ylyy93.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+logo: '/public/logo.png'
 #twitter_username: ""
 #github_username:  ""
 
 # Build settings
+# default settings
+#markdown: kramdown
+#theme: minimal-mistakes-jekyll
+# new settings
+plugins:
+  - jekyll-paginate
 markdown: kramdown
-theme: minimal-mistakes-jekyll
+kramdown:
+  input: GFM
+excerpt_separator: "<!-- more -->"
+sass:
+  style: compressed
+  sass_dir: _scss
+paginate: 5
+paginate_path: '/blog/page:num'
+permalink: pretty
+
+version: 1.0.0
+
+# About/contact
+author:
+  name: ylyy
+  description: A passionate <strong>researcher</strong>.
+  gravatar: 6252b01de08cb073680ff4af1218caef # md5 hash of your email address
+  contact:
+    #linkedin:  ""
+    github:    https://github.com/ylyy93
+    # facebook:  <hide>
+    #twitter:   https://twitter.com/Li_Zhihao
+    #weibo:     http://weibo.com/41173780
+    #email:     http://www.google.com/recaptcha/mailhide/d?k=01I3lZFiZYng9N3QxYEtsDaQ==&c=31wAnZkuKqcG0ATAqJN8Z3ln5kkYLA9TwkGc-IbygpM=
+
+# Navigation (2nd level links supported)
+nav:
+  Home:
+    - '/'
+  Blog:
+    - '/blog/'
+    - { Categories: '/blog/categories/' }
+    - { Tags: '/blog/tags/' }
+  About:
+    - '/about/'
+#  Github Project:
+#    - 'http://codinfox.github.io/'
+
+# Where are tags and categories displayed
+tag_page: '/blog/tags/'
+category_page: '/blog/categories/'
+
+hero:
+  image: /public/img/we_will_be_giants_by_yalestewart.jpg
+  #caption: Original Artwork &copy; <a href="http://yalestewart.deviantart.com/art/We-Will-Be-Giants-370176475">Yale Stewart</a>
+
+# Puglins
+mathjax: true # whether support mathjax
+google_analytics_token: 'UA-133333635-1' # leave blank if you don't want google analytics
+disqus_short_name: '' # leave blank if you don't want disqus
+
+
 #theme: jekyll-theme-hacker
 #remote_theme: wild-flame/jekyll-simple
 #plugins:
