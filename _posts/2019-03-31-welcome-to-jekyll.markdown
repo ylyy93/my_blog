@@ -38,7 +38,7 @@ git remote add origin https://github.com/ylyy93/my_blog.git
 git push origin gh-pages
 {% endhighlight %}
 
-If the [permission is denied][] (due to multiple github accounts), try the following. You might be asked to enter your github account password.
+If the [permission is denied][denied-permission] (due to multiple github accounts), try the following. You might be asked to enter your github account password.
 
 {% highlight ruby %}
 git config -l | grep url
