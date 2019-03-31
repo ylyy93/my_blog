@@ -15,8 +15,8 @@
 # in the templates via {{ site.myvariable }}.
 title: ylyy's Website
 email: ""
-description: "/my_blog" # this means to ignore newlines until "baseurl:"
-baseurl: "" # the subpath of your site, e.g. /blog
+description: "" # this means to ignore newlines until "baseurl:"
+baseurl: "/my_blog" # the subpath of your site, e.g. /blog
 url: "http://ylyy93.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 logo: '/public/logo.png'
 #twitter_username: ""
