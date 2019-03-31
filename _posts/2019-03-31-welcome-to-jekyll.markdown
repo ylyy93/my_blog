@@ -58,7 +58,7 @@ Create a `deploy.sh` file under `my_blog` and copy and paste the following code.
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
 # Build the project.
-jekyll build
+bundle exec jekyll build
 
 # Add changes to git.
 git add .
@@ -81,7 +81,7 @@ Run the following chunk every time you make changes to your website.
 
 If you want to check out your website locally and debug, use
 {% highlight ruby %}
-jekyll serve
+bundle exec jekyll serve
 {% endhighlight %}
 
 
