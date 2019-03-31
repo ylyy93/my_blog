@@ -47,6 +47,37 @@ git config -l | grep url
 git push origin gh-pages
 {% endhighlight %}
 
+## Update your Website
+
+Create a `deploy.sh` file under `my_blog` and copy and paste the following code.
+
+{% highlight ruby %}
+#!/bin/bash
+
+echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
+
+# Build the project.
+jekyll serve # if using a theme, replace with `hugo -t <YOURTHEME>`
+
+# Add changes to git.
+git add .
+
+# Commit changes.
+msg="rebuilding site `date`"
+if [ $# -eq 1 ]
+  then msg="$1"
+fi
+git commit -m "$msg"
+
+# Push source and build repos.
+git push origin gh-pages
+{% endhighlight %}
+
+Run the following chunk every time you make changes to your website.
+{% highlight ruby %}
+./deploy.sh
+{% endhighlight %}
+
 Check out the [awesome tutorial ][awesome-tutorial] on Youtube.
 
 [awesome-tutorial]: https://www.youtube.com/watch?v=fqFjuX4VZmU&list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB&index=19
