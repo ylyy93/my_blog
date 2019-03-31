@@ -3,7 +3,7 @@
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
 # Build the project.
-jekyll build
+bundle exec jekyll build
 
 # Add changes to git.
 git add .
