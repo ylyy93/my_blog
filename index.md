@@ -6,4 +6,4 @@ layout: default
 title: Home
 ---
 
-![snow](/img/snow.jpg)
+![snow](/assets/img/snow.jpg)
