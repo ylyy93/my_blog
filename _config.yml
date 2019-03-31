@@ -16,7 +16,7 @@
 title: ylyy's Website
 email: ""
 description: "/my_blog" # this means to ignore newlines until "baseurl:"
-baseurl: "github.com/ylyy93/my_blog" # the subpath of your site, e.g. /blog
+baseurl: "/github.com/ylyy93/my_blog" # the subpath of your site, e.g. /blog
 url: "http://ylyy93.github.io/my_blog" # the base hostname & protocol for your site, e.g. http://example.com
 logo: '/public/logo.png'
 #twitter_username: ""
