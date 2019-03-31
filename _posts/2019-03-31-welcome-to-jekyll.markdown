@@ -57,7 +57,7 @@ Create a `deploy.sh` file under `my_blog` and copy and paste the following code.
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
 # Build the project.
-jekyll serve # if using a theme, replace with `hugo -t <YOURTHEME>`
+jekyll serve
 
 # Add changes to git.
 git add .
