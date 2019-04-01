@@ -30,3 +30,20 @@ tags: [analytics]
 
 1. Selection bias
 2. Multiple hypothesis testing
+
+###### 方法论
+
+1. 跟上个月(变化未开始)比较。
+  * 问题：seasonality， year-to-year variation。
+2. differences-in-differences approach。
+  * Compare
+  $$\text{diff}_{\text{treatment}}$$ to
+  $\text{diff}_{\text{control}}$ .
+  * 比的不是metric， 而是metric difference。
+  * assumption： parallel trend。 （the groups must have similar additive trends prior to the intervention.）
+3. Synthetic control (Bayesian structural time series model).  (weighted combination of climbing time series data from different mountains.) 把别的地方的time series当作covariates。
+  * 可以看作是更加rigorous的differences-in-differences model。
+4. Retrospective (prospective) cohort study, or a case-control study.
+  * tracking an identified population of individuals longitudinally
+  * idea: group similar users and tracking their outomes.
+  * propensity matching 也可以看作一种grouping method。
