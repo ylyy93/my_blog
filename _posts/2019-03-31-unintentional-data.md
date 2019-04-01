@@ -47,3 +47,15 @@ tags: [analytics]
   * tracking an identified population of individuals longitudinally
   * idea: group similar users and tracking their outomes.
   * propensity matching 也可以看作一种grouping method。
+  * although we only have observational data, if we take care in what we observe and compare we may still be able to make causal claims
+
+###### Four causality guideline related to unintentional DATA
+
+1. Strength of effect.
+  * A larger association is more likely causal.
+2. Consistency.
+  * Can we observe the effect in different places, under different circumstances or at different times?
+3. Biological gradient.
+  * Subjects in slices that see greater exposure to the proposed causal mechanism should (probably) exhibit a greater response.
+4. Temporality.
+  * The effect must follow the cause. 先因后果。
