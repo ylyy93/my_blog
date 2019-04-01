@@ -10,9 +10,6 @@ tags: [analytics]
 
 比如说游戏更新，如果一个人很少上线，那么即使他在treatment group，他也很难upgrade。所以这一类人群在treatment group中是underrepresented。
 
-这篇文章的方法基于一个简单模型：
-intent-to-treat analysis。
-
 核心方法总结：
 1. 只考虑treatment(assignment) group, 进行propensity score
 $P(U=1|X)$ 建模.
