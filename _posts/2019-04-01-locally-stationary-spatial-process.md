@@ -12,8 +12,10 @@ Summary: A stochastic process is locally stationary if its covariance function c
 **[Notes 1:]**
 Notice that local stationarity is a general concept for which different definitions exist. Berman (1974) defined it in terms of Hölder conditions. [Priestley (1965)][@Priestley1965], and further [Dahlhaus (1997)][@Dahlhaus1997], considered a process with continuously time-changing spectral representation. Recently, a different and less restrictive notion of local stationarity has been introduced by means of orthogonal wavelets (see e.g. [Mallat et al. (1998)][@mallat1998]). However, we restrict ourselves to the definition of [Silverman (1957)][@Silverman1957], which is more tractable in the context of continuous-time deformation. With additional smoothness assumptions on R1 and R2, Silverman’s definition of local stationarity can be viewed as a particular case of the later versions.
 
-1. For regularly timed data, locally stationary process was introduced by [Priestley (1965)][@Priestley1965] and developed by [Dahlhaus (1997)][@Dahlhaus1997], following by its descendant in the field of time series, such as [Vogt (2012)][@vogt2012].
-2. For continuous time
+
+
+1. For regularly timed data, locally stationary process was introduced by [Priestley (1965)][@Priestley1965] and developed by [Dahlhaus (1997)][@Dahlhaus1997], following by its descendant in the field of time series, such as [Vogt (2012)][@vogt2012]. Another branch is [Mallat et al. (1998)][@mallat1998]
+2. For continuous time deformation, the definition in [Silverman (1957)][@Silverman1957] seems more appropriate and intuitive.
 2. For regularly spaced data,
 ### Sampson and Guttorp (1992)'s Nonstationary Covariance Function
 
@@ -64,3 +66,5 @@ where $R_1$ is a nonnegative function and $R_2$ is a stationary covariance funct
 [@vogt2012]: https://projecteuclid.org/download/pdfview_1/euclid.aos/1359987532 "Nonparametric regression for locally stationary time series"
 
 [@mallat1998]: https://projecteuclid.org/download/pdf_1/euclid.aos/1030563977 "Adaptive covariance estimation of locally stationary processes"
+
+[@eckley2003]: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.65.3&rep=rep1&type=pdf "Locally Stationary Fields with Application to the Modelling and Analysis of Image Texture"
