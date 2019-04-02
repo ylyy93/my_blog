@@ -3,7 +3,7 @@ layout: post
 title: locally stationary spatial process
 date: 2019-04-01 20:09 -0600
 categories: Research
-tags: [spatial, reading notes]
+tags: [spatial]
 ---
 ## Paper: [On a Time Deformation Reducing Nonstationary Stochastic Processes to Local Stationarity][@genton2004]
 
