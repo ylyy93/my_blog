@@ -58,3 +58,6 @@ tags: [analytics]
 24. On procedural and declarative programming in MapReduce
 
 25. An introduction to the Poisson bootstrap
+- 用到了possion和multinomial之间的逼近关系。
+- 对每一行进行操作。
+- 当有可能存在小组correlation的时候， 先在小unit上sample，然后在大unit上对sample进行整合。
