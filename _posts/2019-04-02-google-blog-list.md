@@ -8,12 +8,16 @@ tags: [analytics]
 
 
 1. [Crawling the internet: data science within a large engineering system](http://www.unofficialgoogledatascience.com/2018/07/by-bill-richoux-critical-decisions-are.html)
+- [Google Search: when to refresh](https://ylyy93.github.io/my_blog/tech/2019/04/02/google-search-when-to-refresh/)
 
 2. [Compliance bias in mobile experiments](http://www.unofficialgoogledatascience.com/2018/03/quicker-decisions-in-imperfect-mobile.html)
+- [Compliance bias](https://ylyy93.github.io/my_blog/tech/2019/04/01/compliance-bias/)
 
 3. [Designing A/B tests in a collaboration network](http://www.unofficialgoogledatascience.com/2018/01/designing-ab-tests-in-collaboration.html)
+- [Designing A/B tests in a collaboration network](https://ylyy93.github.io/my_blog/tech/2019/04/01/designing-a-b-tests-in-a-collaboration-network/)
 
 4. [Unintentional data](http://www.unofficialgoogledatascience.com/2017/10/unintentional-data.html)
+- [Unintentional data](https://ylyy93.github.io/my_blog/tech/2019/04/01/unintentional-data/)
 
 5. [Fitting Bayesian structural time series with the bsts R package](http://www.unofficialgoogledatascience.com/2017/07/fitting-bayesian-structural-time-series.html)
 
@@ -38,10 +42,12 @@ tags: [analytics]
 14. [Estimating causal effects using geo experiments](http://www.unofficialgoogledatascience.com/2016/06/estimating-causal-effects-using-geo.html)
 
 15. [Using random effects models in prediction problems](http://www.unofficialgoogledatascience.com/2016/03/using-random-effects-models-in.html)
+- [random effects models in prediction](https://ylyy93.github.io/my_blog/tech/2019/04/01/random-effects-models-in-prediction/)
 
 16. [LSOS experiments: how I learned to stop worrying and love the variability](http://www.unofficialgoogledatascience.com/2016/02/lsos-experiments-how-i-learned-to-stop.html)
 
 17. [Variance and significance in large-scale online services](http://www.unofficialgoogledatascience.com/2016/01/variance-and-significance-in-large.html)
+- [Variance in LSOS](https://ylyy93.github.io/my_blog/tech/2019/04/01/variance-and-significance-in-large-scale-online-services/)
 
 18. [Replacing Sawzall — a case study in domain-specific language migration](http://www.unofficialgoogledatascience.com/2015/12/replacing-sawzall-case-study-in-domain.html)
 
@@ -58,6 +64,7 @@ tags: [analytics]
 24. [On procedural and declarative programming in MapReduce](http://www.unofficialgoogledatascience.com/2015/09/on-procedural-and-declarative.html)
 
 25. [An introduction to the Poisson bootstrap](http://www.unofficialgoogledatascience.com/2015/08/an-introduction-to-poisson-bootstrap26.html)
+- [Poisson bootstrap](https://ylyy93.github.io/my_blog/tech/2019/04/01/an-introduction-to-the-poisson-bootstrap/)
 - 用到了possion和multinomial之间的逼近关系。
 - 对每一行进行操作。
 - 当有可能存在小组correlation的时候， 先在小unit上sample，然后在大unit上对sample进行整合。

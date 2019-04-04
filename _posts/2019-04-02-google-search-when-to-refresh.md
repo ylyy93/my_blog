@@ -44,3 +44,6 @@ $\sum \text{Pr(page j on host i being fresh)}\times \text{importance(page j on h
 $$
 \rho_{ij} = \frac{1}{\Delta_{ij}}
 $$
+
+# References 
+1. [Crawling the internet: data science within a large engineering system](http://www.unofficialgoogledatascience.com/2018/07/by-bill-richoux-critical-decisions-are.html)
