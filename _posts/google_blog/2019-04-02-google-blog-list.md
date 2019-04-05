@@ -23,6 +23,7 @@ tags: [analytics]
 - [Bayesian structural time series](https://ylyy93.github.io/my_blog/tech/2019/04/04/bayesian-structural-time-series/)
 
 6. [Our quest for robust time series forecasting at scale](http://www.unofficialgoogledatascience.com/2017/04/our-quest-for-robust-time-series.html)
+- [robust and automatic large-scale time series forecasting](https://ylyy93.github.io/my_blog/tech/2019/04/05/robust-and-automatic-large-scale-time-series-forecasting/)
 
 7. [Attributing a deep network’s prediction to its input features](http://www.unofficialgoogledatascience.com/2017/03/attributing-deep-networks-prediction-to.html)
 
