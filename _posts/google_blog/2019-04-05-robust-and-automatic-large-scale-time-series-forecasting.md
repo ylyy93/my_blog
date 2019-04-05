@@ -5,6 +5,8 @@ date: 2019-04-05 12:49 -0600
 categories: Tech
 tags: [analytics]
 ---
+总体来说是一个divide and conquer method。就是各个击破。先处理missing data 异常值，transformation等等。然后处理holiday effect， seasonal effect等等。model去掉，处理residual，然后add back。具体过程不是很明了。有时间再细看。
+
 
 Goal: developing **robust** and **automatic** **large-scale** time series forecasting.
 
