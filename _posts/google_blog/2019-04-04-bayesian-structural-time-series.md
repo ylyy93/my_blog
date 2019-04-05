@@ -99,3 +99,15 @@ $$
 $$
 \delta_{t+1} = D + \rho(\delta_t - D) + \eta_{1t}
 $$
+
+### Recessing modeling （NON-GAUSSIAN)
+- Kalman Filter需要Gaussian assumption。
+
+- dynamic logistic regression model to model serial dependence.
+$$
+\text{logit}(p_t) = \mu_t + \beta^{\top} x_t
+$$
+
+$$
+\mu_{t+1} = \mu_t + \eta_t
+$$
