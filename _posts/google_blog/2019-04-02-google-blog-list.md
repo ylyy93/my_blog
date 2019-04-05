@@ -20,6 +20,7 @@ tags: [analytics]
 - [Unintentional data](https://ylyy93.github.io/my_blog/tech/2019/04/01/unintentional-data/)
 
 5. [Fitting Bayesian structural time series with the bsts R package](http://www.unofficialgoogledatascience.com/2017/07/fitting-bayesian-structural-time-series.html)
+- [Bayesian structural time series](https://ylyy93.github.io/my_blog/tech/2019/04/04/bayesian-structural-time-series/)
 
 6. [Our quest for robust time series forecasting at scale](http://www.unofficialgoogledatascience.com/2017/04/our-quest-for-robust-time-series.html)
 
