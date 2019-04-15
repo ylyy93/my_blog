@@ -9,3 +9,4 @@ tags: [opt]
 - 04/01/2019 USPS 材料寄出 （Overnight）
 - 04/02/2019 Phoenix USCIS 材料签收。
 - 04/08/2019 check兑现
+- 04/15/2019 收到receipt，Status：Case Was Received

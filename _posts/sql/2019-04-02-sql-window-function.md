@@ -437,6 +437,30 @@ WINDOW ntile_window AS
          (PARTITION BY start_terminal ORDER BY duration_seconds)
  ORDER BY start_terminal, duration_seconds
 ```
+
+## Exercises
+1. 用SQL选出每个人成绩的最高的前两条纪录
+`Student`:
+```
+name,subject,score
+zs,math,75
+zs,chinese,81
+lisi,chinese,76
+lisi,math,89
+wangwu,math,100
+wangwu,chinese,81
+wangwu,english,99
+zhaoliu,math,16
+zhaoliu,english,48
+zhaoliu,chinese,59
+```
+
+```
+SELECT *
+FROM (SELECT *, RANK() OVER(PARTITION BY name ORDER BY score DESC) as flag FROM student) t
+WHERE t.flag <= 2
+```
+
 # References
 - [Mode](https://mode.com/resources/sql-tutorial/sql-window-functions/)
 - [SQL Window Functions Introduction](https://drill.apache.org/docs/sql-window-functions-introduction/)
