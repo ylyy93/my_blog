@@ -7,4 +7,4 @@ tags: [spatial]
 ---
 
 ### divide-and-conquer strategy
-![meta_kriging](/assets/posts/spatial/img/meta_kriging.jpeg)
+![meta_kriging](https://ylyy93.github.io/my_blog/assets/posts/spatial/img/meta_kriging.jpeg)
