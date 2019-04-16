@@ -113,4 +113,8 @@ $$
 
 3.Algorithm to compute GM
 - use Weiszfeld's iterative algorithm
+
 ![Weiszfeld](https://ylyy93.github.io/my_blog/assets/posts/spatial/img/weiszfeld.jpeg)
+
+# References
+- [Meta-Kriging: Scalable Bayesian Modeling and Inference for Massive Spatial Datasets](https://www.tandfonline.com/doi/abs/10.1080/00401706.2018.1437474?journalCode=utch20)
