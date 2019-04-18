@@ -42,3 +42,6 @@ $$
 $$
 w = Aw + \eta
 $$
+
+- $A$ is strictly lower-triangular ($a_{ij}=0$ when $j\geq i$)
+- $D$ is diagonal
