@@ -7,5 +7,6 @@ tags: [spatial]
 ---
 
 
-![hier1](https://ylyy93.github.io/my_blog/assets/posts/spatial/img/hier1.pdf)
-![hier2](https://ylyy93.github.io/my_blog/assets/posts/spatial/img/hier2.pdf)
+![hier1](https://ylyy93.github.io/my_blog/assets/posts/spatial/img/hier1.png)
+![hier2](https://ylyy93.github.io/my_blog/assets/posts/spatial/img/hier2.png)
+ 
