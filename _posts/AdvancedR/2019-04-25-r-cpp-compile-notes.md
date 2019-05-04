@@ -3,7 +3,7 @@ layout: post
 title: Enable OpenMP support in clang in Mac OSX Mojave
 date: 2019-04-25 10:54 -0600
 categories: Tech
-tags: [computation]
+tags: [R,openMP]
 ---
 
 ### Install Command Line Tools through XCode
