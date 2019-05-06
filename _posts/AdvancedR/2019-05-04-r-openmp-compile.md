@@ -12,33 +12,11 @@ This section is trying to protect your users!
 [OpenMP](http://openmp.org/wp/) standard. Within R 3.4.\*, the default developer environment was changed to allow for OpenMP to be used on macOS by using a non-default toolchain provided by R Core Team maintainers for macOS. Having said this, it is still important to protect any reference to OpenMP as some users may
 not yet have the ability to use OpenMP.
 
-
 MacOS自身的clang支持openMP的语法不一样，需要很多特别的操作。一种解决办法是用非Apple自带的`llvm`。详情见[Enable OpenMP support in clang in Mac OSX Mojave](https://ylyy93.github.io/my_blog/tech/2019/04/25/r-cpp-compile-notes/)。
 
 关于R版本>=3.4.0的一些更新说明：
 1. R binary for macOS is compiled using a compiler and gfortran libraries that are not included with Xcode.
 2. This version do provide support for OpenMP
-
-#### Install and Uninstall gfortran on MacOS
-```
-sudo rm -r /usr/local/gfortran /usr/local/bin/gfortran
-sudo rm /private/var/db/receipts/com.gnu.gfortran.bom
-sudo rm /private/var/db/receipts/com.gnu.gfortran.plist
-```
-
-- [Binaries available for gfortran](https://gcc.gnu.org/wiki/GFortranBinaries#MacOS)
-- [gfortran installer for Mac OS X](https://github.com/fxcoudert/gfortran-for-macOS/releases)
-- [How to uninstall gfortran on MacOS Sierra?](https://stackoverflow.com/questions/44931195/how-to-uninstall-gfortran-on-macos-sierra)
-
-##### Check gfortran installation
-```
-~> gfortran --version
-GNU Fortran (GCC) 6.1.0
-Copyright (C) 2016 Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-```
-
 
 Two-fold process:
 
@@ -118,8 +96,27 @@ PKG_CFLAGS=$(SHLIB_OPENMP_CFLAGS)
 PKG_LIBS=$(SHLIB_OPENMP_CFLAGS)
 ```
 
+### To use Rcpp and openMP
+如果在程序中引用了`Rcpp.h`头函数，然后想用`R CMD SHLIB`来产生`.so`文件，可以修改在cpp文件所在文件夹下创建Makevars如下。加上`$(SHLIB_OPENMP_CXXFLAGS)`可以enable openMP。
+```
+PKG_CXXFLAGS=`Rscript -e 'Rcpp:::CxxFlags()'` $(SHLIB_OPENMP_CXXFLAGS)
+PKG_LIBS=`Rscript -e 'Rcpp:::LdFlags()'` $(SHLIB_OPENMP_CXXFLAGS)
+```
+
+或者，直接在Terminal运行：
+```
+PKG_CXXFLAGS="$(echo 'Rcpp:::CxxFlags()'| R --vanilla --slave) -fopenmp" R CMD SHLIB loglikMP.cpp
+```
+
+### Check if openMP is correctly set up in R:
+- [Notebook](http://blue.for.msu.edu/envr18/exercises/exercise-1a/exercise_1a.html)
+
+
+
 # References
 
 - [Rcpp-FAQ](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-FAQ.pdf)
 - [5.5 Creating shared objects](http://www.hep.by/gnu/r-patched/r-exts/R-exts_96.html)
 - [OpenMP in R on OS X](http://thecoatlessprofessor.com/programming/openmp-in-r-on-os-x/#after-3-4-0)
+- [R and openMP: boosting compiled code on multi-core cpu-s](http://www.parallelr.com/r-and-openmp-boosting-compiled-code-on-multi-core-cpu-s/)
+- [How to resolve include Rcpp.h problems?](http://r.789695.n4.nabble.com/How-to-resolve-include-Rcpp-h-problems-td962875.html)

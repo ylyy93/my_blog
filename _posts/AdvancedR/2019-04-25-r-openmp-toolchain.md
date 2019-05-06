@@ -72,6 +72,16 @@ https://cran.r-project.org/bin/macosx/tools/gfortran-6.1.pkg
 ```
 Download and Install.
 
+##### Check gfortran installation
+```
+~> gfortran --version
+GNU Fortran (GCC) 6.1.0
+Copyright (C) 2016 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+
 ### Option 1: Enable OpenMP support using Non-Apple `llvm`
 
 #### Using Homebrew's `llvm`:
@@ -139,7 +149,6 @@ sudo rm -rf ~/.R/Makevars
 In the prior configuration for R 3.4.x, we did a lot of configuration in ~/.R/Makevars. A large majority of this configuration is no longer needed within R 3.5.x. Thus, by removing the old files installed, we can have a “fresh” slate when working on installing the toolchain for R 3.5.x.
 
 
-
 ##### Step 2: Install toolchain
 
 ##### clang6
@@ -196,3 +205,6 @@ Rcpp::sourceCpp('path/to/file/helloworld.cpp')
 - [Makevars source file](https://gist.github.com/btskinner/81511cbc878eb08c8abcccef6c30f829)
 - [Enable OpenMP support using Apple llvm ](https://iscinumpy.gitlab.io/post/omp-on-high-sierra/)
 - [R Compiler Tools for Rcpp on macOS](http://thecoatlessprofessor.com/programming/r-compiler-tools-for-rcpp-on-macos/)
+- [Binaries available for gfortran](https://gcc.gnu.org/wiki/GFortranBinaries#MacOS)
+- [gfortran installer for Mac OS X](https://github.com/fxcoudert/gfortran-for-macOS/releases)
+- [How to uninstall gfortran on MacOS Sierra?](https://stackoverflow.com/questions/44931195/how-to-uninstall-gfortran-on-macos-sierra)
