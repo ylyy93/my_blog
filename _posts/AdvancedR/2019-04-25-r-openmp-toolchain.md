@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Enable OpenMP support in clang in Mac OSX Mojave
+title: R OpenMP toolchain on Mac OSX Mojave
 date: 2019-04-25 10:54 -0600
 categories: Tech
 tags: [R,openMP]

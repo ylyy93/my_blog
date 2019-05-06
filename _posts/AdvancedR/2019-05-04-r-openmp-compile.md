@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Makevars Use openMP in Rcpp (Mac Mojave system)
+title: R C++ Integration with OpenMP enabled on Mac Mojave system
 date: 2019-05-04 12:40 -0600
 categories: Tech
 tags: [R]
