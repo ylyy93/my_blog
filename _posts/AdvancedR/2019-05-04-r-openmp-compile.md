@@ -1,6 +1,6 @@
 ---
 layout: post
-title: R C++ Integration with OpenMP enabled on Mac Mojave system
+title: OpenMP R C++ Integration on Mac Mojave
 date: 2019-05-04 12:40 -0600
 categories: Tech
 tags: [R]
