@@ -1,6 +1,6 @@
 ---
 layout: post
-title: OpenMP: R OpenMP toolchain on Mac OSX Mojave
+title: OpenMP\: R OpenMP toolchain on Mac OSX Mojave
 date: 2019-04-25 10:54 -0600
 categories: Tech
 tags: [R,openMP]
