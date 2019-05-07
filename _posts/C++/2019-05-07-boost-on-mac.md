@@ -2,6 +2,8 @@
 layout: post
 title: Boost on Mac (using Clang)
 date: 2019-05-07 11:16 -0600
+categories: Tech
+tags: [c++]
 ---
 
 Since both brew and macports do not seem to work well, we will build Boost library from source.
