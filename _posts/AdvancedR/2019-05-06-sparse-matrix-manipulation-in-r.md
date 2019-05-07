@@ -47,3 +47,10 @@ Cpredobs <-  cov.exp( hpredobs, theta=c( res$par[1:3])) * cov.wend1( hpredobs, t
 Ypred <- c( Cpredobs %*% solve.spam( cholCobsobs, drift$resid) +  mupred[ isNA])
 
 ```
+
+
+# References
+- [spam: A Sparse Matrix R Package with Emphasis on MCMC Methods for Gaussian Markov Random Fields](https://www.jstatsoft.org/article/view/v036i10)
+- [Illustrations and Examples](https://www.math.uzh.ch/pages/spam/articles/spam.html)
+- [A Sparse Matrix Library in C++ for High Performance Architectures](http://www.netlib.org/lapack/lawnspdf/lawn74.pdf)
+- [SparseLib++](https://math.nist.gov/sparselib++/)
