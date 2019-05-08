@@ -49,4 +49,7 @@ CXX14FLAGS+=-Wno-ignored-attributes
 
 # References
 - [RcppEigen LLT resulted in a vector of NaN](https://stackoverflow.com/questions/51832832/rcppeigen-llt-resulted-in-a-vector-of-nan)
-- [](https://stackoverflow.com/questions/50544379/warning-in-rcppnumerical-and-rcppeigen-on-ubuntu-18-04)
+- [arning in RcppNumerical and RcppEigen on Ubuntu 18.04](https://stackoverflow.com/questions/50544379/warning-in-rcppnumerical-and-rcppeigen-on-ubuntu-18-04)
+- [MappedSparseMatrix in RcppEigen](https://stackoverflow.com/questions/26160815/mappedsparsematrix-in-rcppeigen)
+- [Rcpp Eigen sparse matrix cbind](https://stackoverflow.com/questions/45875668/rcpp-eigen-sparse-matrix-cbind)
+- [RcppEigen code](http://www.cse.unsw.edu.au/~mike/myrlibrary/RcppEigen/doc/code.R)

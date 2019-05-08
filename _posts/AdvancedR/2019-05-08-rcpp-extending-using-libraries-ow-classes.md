@@ -386,6 +386,12 @@ Check the R package `RcppEigen` and look for the header file `RcppEigenWrap.h`.
 
 ## Creating as and wrap for sparse matrices
 ### `as`
+
+1. The classes for the most common types of R vectors are defined in namespace `Rcpp`:
+`NumericVector`, `IntegerVector`, `CharacterVector`, and `LogicalVector`. Besides these,
+one can define template vector by `const int RTYPE = Rcpp::traits::r_sexptype_traits<T>::rtype;` and
+`Vector<RTYPE>`.
+
 ```
 #include <RcppArmadillo.h>
  // [[Rcpp::depends(RcppArmadillo)]]
@@ -410,6 +416,8 @@ Check the R package `RcppEigen` and look for the header file `RcppEigenWrap.h`.
        const int RTYPE = Rcpp::traits::r_sexptype_traits<T>::rtype;
 
        // instantiate S4 object with the sparse matrix passed in
+       // copy R object sx from R to S4 object mat in C++
+       // dims,i,p,x are R Vectors defined in namespace Rcpp
        S4 mat(sx);
        IntegerVector dims = mat.slot("Dim");
        IntegerVector i = mat.slot("i");
@@ -435,6 +443,43 @@ Check the R package `RcppEigen` and look for the header file `RcppEigenWrap.h`.
 
  }
 
+```
+
+### `wrap()`
+
+```
+namespace Rcpp {
+
+     // convert an Armadillo sp_mat into a corresponding R sparse matrix
+     // we copy to STL vectors as the Matrix package expects vectors whereas the
+     // default wrap in Armadillo returns matrix with one row (or col)
+     //
+     // NB: called wrap_() here as a similar method is already in the
+     //     RcppArmadillo sources
+     //
+     template <typename T> SEXP wrap_(const arma::SpMat<T>& sm) {
+       const int  RTYPE = Rcpp::traits::r_sexptype_traits<T>::rtype;
+
+       // In order to update internal state of SpMat object
+       sm.sync();
+       IntegerVector dim = IntegerVector::create( sm.n_rows, sm.n_cols );
+
+       // copy the data into R objects
+       Vector<RTYPE> x(sm.values, sm.values + sm.n_nonzero ) ;
+       IntegerVector i(sm.row_indices, sm.row_indices + sm.n_nonzero);
+       IntegerVector p(sm.col_ptrs, sm.col_ptrs + sm.n_cols+1 ) ;
+
+       std::string klass = "dgCMatrix";
+
+       S4 s(klass);
+       s.slot("i")   = i;
+       s.slot("p")   = p;
+       s.slot("x")   = x;
+       s.slot("Dim") = dim;
+       return s;
+     }
+
+ }
 ```
 ## References
 - [Rcpp Extending](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-extending.pdf)

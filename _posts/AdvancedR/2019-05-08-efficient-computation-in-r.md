@@ -453,3 +453,7 @@ If you know the size of the cache, you can try to design your code so that in a 
 
 ```{r, cache-aware}
 ```
+
+
+## References
+- [Writing Efficient R Code](https://raw.githubusercontent.com/berkeley-scf/tutorial-efficient-R/master/efficient-R.Rmd)
