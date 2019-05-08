@@ -280,3 +280,4 @@ Relative deviation from result: 0.624062
 - [setting library include paths in c++](https://stackoverflow.com/questions/2496950/setting-library-include-paths-in-c)
 - [A Performance Comparison of Linear Algebra Libraries for Sparse Matrix-Vector Product](file:///Users/lolofter/Documents/Projects/krylov_ref/spam/475-961-1-SM.pdf)
 - [gpuR](https://github.com/cdeterman/gpuR/blob/master/src/solve.cpp)
+- [ViennaCL and PETSc Tutorial](https://www.karlrupp.net/wp-content/uploads/2013/05/FEMTEC2013-tutorial.pdf)

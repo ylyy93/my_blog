@@ -384,6 +384,59 @@ automagic_ublas_rcpp(c(1,2,3.2,1.2))
 ## Other Examples
 Check the R package `RcppEigen` and look for the header file `RcppEigenWrap.h`.
 
+## Creating as and wrap for sparse matrices
+### `as`
+```
+#include <RcppArmadillo.h>
+ // [[Rcpp::depends(RcppArmadillo)]]
+
+ using namespace Rcpp;
+
+ namespace Rcpp {
+
+     // converts an SEXP object from R which was created as a sparse
+     // matrix via the Matrix package) into an Armadillo sp_mat matrix
+     //
+     // NB: called as_() here as a similar method is already in the
+     //     RcppArmadillo sources
+     //
+
+     // The following as_() only applies to dgCMatrix.
+     // For other types of sparse matrix conversion,
+     // you might want to check the source code of RcppArmadillo.
+     template <typename T> arma::SpMat<T> as_(SEXP sx) {
+
+       // Rcpp representation of template type
+       const int RTYPE = Rcpp::traits::r_sexptype_traits<T>::rtype;
+
+       // instantiate S4 object with the sparse matrix passed in
+       S4 mat(sx);
+       IntegerVector dims = mat.slot("Dim");
+       IntegerVector i = mat.slot("i");
+       IntegerVector p = mat.slot("p");
+       Vector<RTYPE> x = mat.slot("x");
+
+       // create sp_mat object of appropriate size
+       arma::SpMat<T> res(dims[0], dims[1]);
+
+       // In order to access the internal arrays of the SpMat class
+       res.sync();
+
+       // Making space for the elements
+       res.mem_resize(static_cast<unsigned>(x.size()));
+
+       // Copying elements
+       std::copy(i.begin(), i.end(), arma::access::rwp(res.row_indices));
+       std::copy(p.begin(), p.end(), arma::access::rwp(res.col_ptrs));
+       std::copy(x.begin(), x.end(), arma::access::rwp(res.values));
+
+       return res;
+     }
+
+ }
+
+```
 ## References
 - [Rcpp Extending](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-extending.pdf)
 - [Custom Templated as and wrap Functions within Rcpp.](https://gallery.rcpp.org/articles/custom-templated-wrap-and-as-for-seamingless-interfaces/)
+- [Creating as and wrap for sparse matrices](http://gallery.rcpp.org/articles/as-and-wrap-for-sparse-matrices/)

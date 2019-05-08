@@ -1,0 +1,455 @@
+---
+layout: post
+title: Efficient Computation in R
+date: 2019-05-08 14:03 -0600
+categories: Tech
+tags: [R]
+---
+
+Writing Efficient R Code
+==============================================================
+
+Chris Paciorek, Department of Statistics, UC Berkeley
+
+```{r setup, include=FALSE}
+library(knitr)
+library(stringr)
+read_chunk('efficient-R.R')
+```
+
+# 0) This Tutorial
+
+This tutorial covers strategies for writing efficient R code by taking advantage of the underlying structure of how R works. In addition it covers tools and strategies  for timing and profiling R code.
+
+While some of the strategies covered here are specific to R, many are built on principles that can guide your coding in other languages.
+
+You should be able to work through this tutorial in any working R installation, including through RStudio. To work through it using R linked to a fast linear algebra package, you may want to use a virtual machine developed here at Berkeley, the [Berkeley Common Environment (BCE)](http://bce.berkeley.edu). BCE is a virtual Linux machine - basically it is a Linux computer that you can run within your own computer, regardless of whether you are using Windows, Mac, or Linux. This provides a common environment so that things behave the same for all of us. However, note that BCE has not been updated in a while.
+
+This tutorial assumes you have a working knowledge of R.
+
+Materials for this tutorial, including the R markdown file and associated code files that were used to create this document are available on Github at (https://github.com/berkeley-scf/tutorial-efficient-R).  You can download the files by doing a git clone from a terminal window on a UNIX-like machine, as follows:
+```{r, clone, eval=FALSE}
+git clone https://github.com/berkeley-scf/tutorial-efficient-R
+```
+
+To create this HTML document, simply compile the corresponding R Markdown file in R as follows (the following will work from within BCE after cloning the repository as above).
+```{r, build-html, eval=FALSE}
+Rscript -e "library(knitr); knit2html('efficient-R.Rmd')"
+```
+This tutorial by Christopher Paciorek is licensed under a Creative Commons Attribution 3.0 Unported License.
+
+
+# 1) Background
+
+
+In part because R is an interpreted language and in part because R
+is very dynamic (objects can be modified essentially arbitrarily after
+being created), R can be slow. Hadley Wickham's Advanced R book has
+a section called *Performance* that discusses this in detail. However, there
+are a variety of ways that one can write efficient R code.
+
+In general, try to make use of R's built-in functions (including matrix
+operations and linear algebra), as these tend to be implemented
+internally (i.e., via compiled code in C or Fortran).  Sometimes you
+can figure out a trick to take your problem and transform it to make
+use of the built-in functions.
+
+Before you spend a lot of time trying to make your code go faster,
+it's best to first write transparent, easy-to-read code to help avoid
+bugs.  Then if it doesn't run fast enough, time the different parts of
+the code (profiling) to assess where the bottlenecks are. Concentrate
+your efforts on those parts of the code. Try out different
+specifications, checking that the results are the same as your
+original code.  And as you gain more experience, you'll get some
+intuition for what approaches might improve speed, but even with
+experience I find myself often surprised by what matters and what
+doesn't.
+
+Section 2 of this document discusses the use of fast linear algebra libraries, Section 3 discusses tools for timing and profiling code, and Section 4 discusses core strategies for writing efficient R code.
+
+# 2) Fast linear algebra
+
+One way to speed up a variety of operations in R (sometimes by as much as an order of magnitude) is to make sure your installation of R uses an optimized BLAS (Basic Linear Algebra Subroutines). The BLAS underlies all linear algebra, including costly calculations such as matrix-matrix multiplication and matrix decompositions such as the SVD and Cholesky decomposition. Some optimized BLAS packages are:
+ - Intel's *MKL*
+ - *OpenBLAS*
+ - AMD's *ACML*
+ - *vecLib* for Macs
+
+To use an optimized BLAS, talk to your systems adminstrator, see [Section A.3 of the R Installation and Administration Manual](https://cran.r-project.org/manuals.html), or see [these instructions to use *vecLib* BLAS on your own Mac](http://statistics.berkeley.edu/computing/blas).
+
+Any calls to BLAS or to the LAPACK libraries that use BLAS to do higher-level linear algebra calculations will be nearly as fast as if you used C/C++ or Matlab, because R is using the compiled code from the BLAS and LAPACK libraries.
+
+In addition, the BLAS libraries above are threaded -- they can use more than one core, and often will do so by default. More details in the tutorial on parallel programming.
+
+
+# 3) Tools for assessing efficiency
+
+
+## 3.1) Benchmarking
+
+*system.time* is very handy for comparing the speed of different
+implementations. Here's a basic comparison of the time to calculate the row means of a matrix using a for loop compared to the built-in *rowMeans* function.
+
+```{r, system-time}
+```
+
+In general, *user* time gives the CPU time spent by R and *system* time gives the CPU time spent by the kernel (the operating system) on behalf of R. Operations that fall under system time include opening files, doing input or output, starting other processes, etc.
+
+To time code that runs very quickly, you may want to use the *microbenchmark*
+package. Of course one would generally only care about such timing if a larger operation does the quick calculation very many times. Here's a comparison of different ways of accessing an element of a dataframe.
+
+```{r, microbenchmark}
+```
+
+
+The *rbenchmark* package provides a nice wrapper function, *benchmark*,
+that automates timings and comparisons.
+
+```{r, benchmark}
+```
+
+In general, it's a good idea to repeat (replicate) your timing, as there is some stochasticity in how fast your computer will run a piece of code at any given moment.
+
+You might also checkout the *tictoc* package.
+
+## 3.2) Profiling
+
+
+
+The *Rprof* function will show you how much time is spent in
+different functions, which can help you pinpoint bottlenecks in your
+code.  The output from *Rprof* can be hard to decipher, so you
+may want to use the *proftools* package functions, which make use of
+*Rprof* under the hood.
+
+Here's a function that works with a correlation matrix such as one
+might have for time series data. Basically, it creates a matrix of time lags (*dd*) and
+computes the correlation between the outcome for all pairs of times, based on the time
+lag between the pair of times. Then it computes the Cholesky factor of the correlation
+matrix so that it can generate a random time series in the last line. The question
+one might ask is which part(s) of the code take the most time.
+
+```{r, Rprof, eval=FALSE}
+```
+
+Here's the result for the *makeTS* function:
+```
+ path                      total.pct self.pct
+ makeTS                    100.00     0.00   
+ . ?? (#File 1: :4)         56.06    56.06   
+ . chol (#File 1: :5)       30.30     0.00   
+ . . standardGeneric        30.30     0.00   
+ . . . chol                 30.30     0.00   
+ . . . . chol.default       30.30    30.30   
+ . rdist (#File 1: :3)      12.12     0.00   
+ . . .Call                  12.12    12.12   
+ . crossprod (#File 1: :7)   1.52     0.00   
+ . . crossprod               1.52     0.00   
+ . . . base::crossprod       1.52     1.52   
+```
+
+
+Note the nestedness of the results. For example, 12 percent of the time was spent in the call to *rdist*, of which essentially all of that was spent in *.Call*, which is a call out to C code.
+
+In this case, the results are not fully helpful, as 56 percent of the time is spent in other computations within *makeTS* that are not shown individually (see the "??" line).
+
+As we increase the number of time points,
+the time taken up by the Cholesky would increase since that calculation
+is order of $n^{3}$ while the others are order $n^{2}$ (more in the Linear Algebra unit).
+
+In this case, since the Cholesky and the main calculations in *rdist*, as well as *exp*,
+are all done in compiled C or Fortran code, there is probably not much we can do
+to speed this up (apart from using an optimized BLAS, which is essential). But in other cases profiling may reveal the slow steps in a piece of code.
+
+Note that *Rprof* works by sampling - every little while (the *interval* argument) during a calculation it finds out what function R is in and saves that information to the file given as the argument to *Rprof*. So if you try to profile code that finishes really quickly, there's not enough opportunity for the sampling to represent the calculation accurately and you may get spurious results.
+
+You might also check out *profvis* for an alternative to displaying profiling information
+generated by *Rprof*.
+
+*Warning*: *Rprof* conflicts with threaded linear algebra,
+so you may need to set OMP_NUM_THREADS to 1 to disable threaded
+linear algebra if you profile code that involves linear algebra.
+
+
+# 4) Strategies for improving efficiency
+
+
+## 4.1) Pre-allocate memory
+
+It is very inefficient to iteratively add elements to a vector, matrix,
+data frame, array or list (e.g., using *c*, *cbind*,
+*rbind*, etc. to add elements one at a time). Instead, create the full object in advance
+(this is equivalent to variable initialization in compiled languages)
+and then fill in the appropriate elements. The reason is that when
+R appends to an existing object, it creates a new copy and as the
+object gets big, most of the computation involves the repeated
+memory allocation to create the new objects.  Here's
+an illustrative example, but of course we would not fill a vector
+like this using loops because we would in practice use vectorized calculations.
+
+```{r, preallocate}
+```
+
+It's not necessary to use *as.numeric* above though it saves
+a bit of time. **Challenge**: figure out why I have `as.numeric(NA)`
+and not just `NA`.
+
+In some cases, we can speed up the initialization by initializing a vector of length one and then changing its length and/or dimension, although in  many practical
+circumstances this would be overkill.
+
+For example, for matrices, start with a vector of length one, change the length, and then change the
+dimensions
+
+```{r, init-matrix}
+```
+
+For lists, we can do this
+
+```{r, init-list}
+```
+
+
+
+## 4.2) Vectorized calculations
+
+One key way to write efficient R code is to take advantage of R's
+vectorized operations.
+
+```{r, vectorize, cache=TRUE}
+```
+
+So what is different in how R handles the calculations above that
+explains the huge disparity in efficiency? The vectorized calculation is being done natively
+in C in a for loop. The explicit R for loop involves executing the for
+loop in R with repeated calls to C code at each iteration. This involves a lot
+of overhead because of the repeated processing of the R code inside the loop. For example,
+in each iteration of the loop, R is checking the types of the variables because it's possible
+that the types might change, such as in this loop:
+
+```
+x <- 3
+for( i in 1:n ) {
+     if(i == 7) {
+          x <- 'foo'
+     }
+     y <- x^2
+}
+```
+
+You can
+usually get a sense for how quickly an R call will pass things along
+to C or Fortran by looking at the body of the relevant function(s) being called
+and looking for *.Primitive*, *.Internal*, *.C*, *.Call*,
+or *.Fortran*. Let's take a look at the code for `+`,
+*mean.default*, and *chol.default*.
+
+```{r, primitive}
+```
+
+Many R functions allow you to pass in vectors, and operate on those
+vectors in vectorized fashion. So before writing a for loop, look
+at the help information on the relevant function(s) to see if they
+operate in a vectorized fashion. Functions might take vectors for one or more of their arguments.
+
+```{r, vectorized}
+```
+
+**Challenge**: Consider the chi-squared statistic involved in
+a test of independence in a contingency table:
+\[
+\chi^{2}=\sum_{i}\sum_{j}\frac{(y_{ij}-e_{ij})^{2}}{e_{ij}},\,\,\,\, e_{ij}=\frac{y_{i\cdot}y_{\cdot j}}{y_{\cdot\cdot}}
+\]
+where $y_{i\cdot}=\sum_{j}y_{ij}$ and $y_{\cdot j} = \sum_{i} y_{ij}$. Write this in a vectorized way
+without any loops.  Note that 'vectorized' calculations also work
+with matrices and arrays.
+
+Vectorized operations can sometimes be faster than built-in functions
+(note here the *ifelse* is notoriously slow),
+and clever vectorized calculations even better, though sometimes the
+code is uglier. Here's an example of setting all negative values in a
+vector to zero.
+
+```{r, vec-tricks, cache=TRUE}
+```
+
+
+Additional tips:
+ - If you do need to loop over dimensions of a matrix or array, if possible
+loop over the smallest dimension and use the vectorized calculation
+on the larger dimension(s). For example if you have a 10000 by 10 matrix, try to set
+up your problem so you can loop over the 10 columns rather than the 10000 rows.
+ - In general, looping over columns is likely to be faster than looping over rows
+given R's column-major ordering (matrices are stored in memory as a long array in which values in a column are adjacent to each other) (see more in Section 4.6 on the cache).
+ - You can use direct arithmetic operations to add/subtract/multiply/divide
+a vector by each column of a matrix, e.g. `A*b` does element-wise multiplication of
+each column of *A* by a vector *b*. If you need to operate
+by row, you can do it by transposing the matrix.
+
+Caution: relying on R's recycling rule in the context of vectorized
+operations, such as is done when direct-multiplying a matrix by a
+vector to scale the rows relative to each other, can be dangerous as the code is not transparent
+and poses greater dangers of bugs. In some cases you may want to
+first write the code transparently and
+then compare the more efficient code to make sure the results are the same. It's also a good idea to  comment your code in such cases.
+
+## 4.3) Using *apply* and specialized functions
+
+Another core efficiency strategy is to use the *apply* functionality.
+Even better than *apply* for calculating sums or means of columns
+or rows (it also can be used for arrays) is {row,col}{Sums,Means}.
+
+```{r, apply}
+```
+
+We can 'sweep' out a summary statistic, such as subtracting
+off a mean from each column, using *sweep*
+
+```{r, sweep}
+```
+
+Here's a trick for doing the sweep based on vectorized calculations, remembering
+that if we subtract a vector from a matrix, it subtracts each element
+of the vector from all the elements in the corresponding ROW. Hence the
+need to transpose twice.
+
+```{r, vectorized-sweep}
+```
+
+### Are *apply*, *lapply*, *sapply*, etc. faster than loops?
+
+Using *apply* with matrices and versions of *apply* with lists may or may not be faster
+than looping but generally produces cleaner code. Whether looping
+is slower will depend on whether a substantial part of the work is
+in the overhead involved in the looping or in the time required by the function
+evaluation on each of the elements. If you're worried about speed,
+it's a good idea to benchmark the *apply* variant against looping.
+
+Here's an example where *apply* is not faster than a loop. Similar
+examples can be constructed where *lapply* or *sapply* are not faster
+than writing a loop.
+
+```{r, apply-vs-for}
+```
+
+And here's an example where *sapply* is much faster, because the core function evaluation at each iteration is very fast:
+
+```{r, apply-vs-for-part2}
+```
+
+You'll notice if you look at the R code for *lapply* (*sapply* just calls *lapply*) that it calls directly out to C code, so the for loop is executed in compiled code.
+
+```{r, lapply-callout}
+print(lapply)
+```
+
+## 4.4) Matrix algebra efficiency
+
+Often calculations that are not explicitly linear algebra calculations
+can be done as matrix algebra. For example, we can sum the rows of a matrix by multiplying by a vector of ones. Given the extra computation involved in actually multiplying each number by one, it's surprising that this is faster than using R's heavily optimized *rowSums* function. It might be at least partially related to cache effects as *colSums* is more than twice as fast as *rowSums* in this case.
+
+```{r, matrix-calc}
+```
+
+On the other hand, big matrix operations can be slow. **Challenge**: Suppose you
+want a new matrix that computes the differences between successive
+columns of a matrix of arbitrary size. How would you do this as matrix
+algebra operations? It's possible to write it as multiplying the matrix
+by another matrix that contains 0s, 1s, and -1s in appropriate places.
+ Here it turns out that the
+*for* loop is much faster than matrix multiplication. However,
+there is a way to do it faster as matrix direct subtraction.
+
+When doing matrix algebra, the order in which you do operations can
+be critical for efficiency. How should I order the following calculation?
+
+```{r, linalg-order, cache=TRUE}
+```
+
+Why is the second order much faster?
+
+We can use the matrix direct product (i.e., `A*B`) to do
+some manipulations much more quickly than using matrix multiplication.
+**Challenge**: How can I use the direct product to find the trace
+of a matrix, $XY$?
+
+Finally, when working with diagonal matrices, you can generally get much faster results by being smart. The following operations: $X+D$, $DX$, $XD$
+are mathematically the sum of two matrices and products of two matrices.
+But we can do the computation without using two full matrices.
+**Challenge**: How?
+
+```{r, diag}
+```
+
+More generally, sparse matrices and structured matrices (such as block
+diagonal matrices) can generally be worked with MUCH more efficiently
+than treating them as arbitrary matrices. The R packages *spam* (for arbitrary
+sparse matrices), *bdsmatrix* (for block-diagonal matrices),
+and *Matrix* (for a variety of sparse matrix types) can help, as can specialized code available in other languages,
+such as C and Fortran packages.
+
+
+## 4.5) Fast mapping/lookup tables
+
+Sometimes you need to map between two vectors. E.g.,
+$y_{ij}\sim\mathcal{N}(\mu_{j},\sigma^{2})$
+is a basic ANOVA type structure, where multiple observations in group $j$
+are associated with a common mean, $\mu_j$.
+
+How can we quickly look up the mean associated with each observation?
+A good strategy is to create a vector, *grp*, that gives a numeric
+mapping of the observations to their cluster. Then you can access
+the $\mu$ value relevant for each observation as: `mus[grp]`. This requires
+that *grp* correctly map to the right elements of *mus*.
+
+The *match* function can help in creating numeric indices that can then be used for lookups.
+Here's how you would create an index vector, *grp*, if it doesn't already exist.
+
+```{r, match-lookup}
+```
+
+R allows you to look up elements of vector by name.
+For example:
+
+```{r, name-lookup}
+```
+
+You can do similar things in terms of looking up by name with dimension
+names of matrices/arrays, row and column names of dataframes, and
+named lists.
+
+However, looking things up by name can be slow relative to looking up by index.
+Here's a toy example where we have a vector or list with a million elements and
+the character names of the elements are just the character versions of the
+indices of the elements.  
+
+```{r, index-lookup}
+```
+
+Lookup by name is slow because R needs to scan through the objects
+one by one until it finds the one with the name it is looking for.
+In contrast, to look up by index, R can just go directly to the position of interest.
+
+
+In contrast, we can look up by name in an environment very quickly, because environments in R use hashing, which allows for fast lookup that does not require scanning through all of the names in the environment. In fact, this is how R itself looks for values when you specify variables in R code.
+
+```{r, env-lookup, cache=TRUE}
+```
+
+The first benchmark indicates that lookup in an environment is nearly as fast as lookup by index in a vector or list, though the microbenchmark suggests that lookup in the environment is somewhat slower.
+
+
+
+## Cache-aware programming
+
+In addition to main memory (what we usually mean when we talk about RAM), computers also have memory caches, which are small amounts of fast memory that can be accessed very quickly by the processor. For example your computer might have L1, L2, and L3 caches, with L1 the smallest and fastest and L3 the largest and slowest. The idea is to try to have the data that is most used by the processor in the cache.
+
+If the next piece of data needed for computation is available in the cache, this is a *cache hit* and the data can be accessed very quickly. However, if the data is not available in the cache, this is a *cache miss* and the speed of access will be a lot slower. *Cache-aware programming* involves writing your code to minimize cache misses. Generally when data is read from memory it will be read in chunks, so values that are contiguous will be read together.
+
+How does this inform one's programming? For example, if you have a matrix of values stored in column-major order, computing on a column will be a lot faster than computing on a row, because the column can be read into the cache from main memory and then accessed in the cache. In contrast, if the matrix is large and therefore won't fit in the cache, when you access the values of a row, you'll have to go to main memory repeatedly to get the values for the row because the values are not stored contiguously.
+
+There's a nice example of the importance of the cache at [the bottom of this blog post](https://wrathematics.github.io/2016/10/28/comparing-symmetric-eigenvalue-performance/).
+
+If you know the size of the cache, you can try to design your code so that in a given part of your code you access data structures that will fit in the cache. This sort of thing is generally more relevant if you're coding in a language like C. But it can matter sometimes in R too. Here's an example:
+
+```{r, cache-aware}
+```
