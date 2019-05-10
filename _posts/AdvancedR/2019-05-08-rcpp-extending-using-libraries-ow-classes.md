@@ -481,6 +481,33 @@ namespace Rcpp {
 
  }
 ```
+
+```
+// [[Rcpp::export]]
+arma::sp_mat doubleSparseMatrix(arma::sp_mat m) {
+    Rcpp::Rcout << m << std::endl;  // use the i/o code from Armadillo
+    arma::sp_mat n = 2*m;
+    return n;
+}
+```
+
+In R:
+```
+suppressMessages({
+  library(methods)
+  library(Matrix)
+})
+i <- c(1,3:8)              # row indices
+j <- c(2,9,6:10)           # col indices
+x <- 7 * (1:7)             # values
+A <- sparseMatrix(i, j, x = x)
+A
+B <- doubleSparseMatrix(A)
+B
+identical(2*A, B)
+```
+
+
 ## References
 - [Rcpp Extending](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-extending.pdf)
 - [Custom Templated as and wrap Functions within Rcpp.](https://gallery.rcpp.org/articles/custom-templated-wrap-and-as-for-seamingless-interfaces/)
