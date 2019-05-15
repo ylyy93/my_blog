@@ -78,3 +78,8 @@ mpirun Rscript --no-save control.R 10000 6
 ```
 
 Here, $n=10000$ and $\delta=6$.
+
+When you are done, in terminal, run
+```
+exit
+```
