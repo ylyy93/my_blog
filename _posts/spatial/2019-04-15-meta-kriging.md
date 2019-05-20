@@ -42,7 +42,7 @@ $$
 p(\beta|\sigma^2,y) = N(\beta|Mm,\sigma^2M),
 $$
 
-where $a^* = a+N/2$, $b^*=b+c/2$, $m=V_\beta^{-1}\mu_\beta + X^{\top} D^{-1}y$, $M^{-1}=V_\beta^{-1} + X^{\top} D^{-1}X$ and $c=\mu_\beta^{\top} V_\beta^{-1}\mu_\beta + y^{\top} D^{-1}y -m^{\top} Mm$.
+where $a^\* = a+N/2$, $b^\*=b+c/2$, $m=V_\beta^{-1}\mu_\beta + X^{\top} D^{-1}y$, $M^{-1}=V_\beta^{-1} + X^{\top} D^{-1}X$ and $c=\mu_\beta^{\top} V_\beta^{-1}\mu_\beta + y^{\top} D^{-1}y -m^{\top} Mm$.
 
 
 #### Sampling strategy: sample from $p(\beta,\sigma^2|y)$
@@ -115,6 +115,63 @@ $$
 - use Weiszfeld's iterative algorithm
 
 ![Weiszfeld](https://ylyy93.github.io/my_blog/assets/posts/spatial/img/weiszfeld.jpeg)
+
+## Simulation Setting
+
+Objectives:
+1. parameters
+2. interpolation
+3. prediction
+
+Focus:
+1. GP based geostatistics
+2. GP with compactly supported correlation functions
+
+Simulation 1:
+1. moderately large (n=3,500)
+2. allows
+  - full Bayesian impletation of the full Gaussian process model (w.o. approximation).
+  - GP model with compactly supported correlation (CSC)
+  - SMK approximations to the full GP (SMK-GP)
+
+Simulation 2:
+1. 41,000 locations.
+
+Data generation:
+- datasets from both simulations are from a standard GP model with the `RandomFields` package.
+
+Competitors:
+1. `laGP`:
+2. `LatticeKrig`:
+3. BISP (Block independent pooled spatial models)
+  - step 1: fits a spatial model independently on K exhaustive and mutually exclusive subsets of data.
+  - step 2: weighted inference is drawn based upon subset posteriors and weight 1/K corresponding to each subset posterior.
+
+Subset partitioning scheme????
+- Scheme 1: random partitioning scheme:
+  - Draw $S_1$, the first subset, randomly from the full data.
+  - For k = 2,...,K, draw $S_k$, the kth subset, randomly from $S-(\cup_{i=1}^{k-1}S_i)$.
+- Scheme 2: k-means scheme:
+  - clustering into K different clusters
+  - inferior than random partitioning scheme.
+- Scheme 3: random-block partitioning (RBP)
+  - 跟Scheme 1相差无几。
+
+How many clusters?
+- K = 3,6,10 => n = 1000, 500, 300
+
+
+Parallel Implementation:
+  - `doParallel`
+  - `foreach`
+  - Unix workstation with 64 cores.
+
+Surface interpolation:
+  - `MBA`
+
+All predictive inferences are based upon 25 simulated datasets.
+
+
 
 # References
 - [Meta-Kriging: Scalable Bayesian Modeling and Inference for Massive Spatial Datasets](https://www.tandfonline.com/doi/abs/10.1080/00401706.2018.1437474?journalCode=utch20)
