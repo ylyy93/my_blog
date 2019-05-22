@@ -6,6 +6,24 @@ categories: Research
 tags: [spatial]
 ---
 
+## R package `spNNGP`
+
+For the exponential covariance function, I am used to following formula:
+$$
+\sigma^2(1-c)\exp(-h/r) + \sigma^2cI(s_i=s_j) ~~~~~ (1)
+$$
+
+### Notation
+- `theta.alpha`: $$c(\phi,\alpha)$$
+- $\gamma(h) = \exp(-\phi h)$, i.e., $\phi = 1/r$ for $r$ in (1)
+- $\alpha = \tau^2 / \sigma^2$, i.e., $c/(1-c)$ for $c$ in (1)
+- $\tau^2$: measurement error, i.e., $\sigma^2c$ for $\sigma^2,c$ in (1)
+- $\sigma^2$: variance of the GP, i.e, $\sigma^2(1-c)$ for $\sigma^2,c$ in (1)
+
+
+## Paper
+
+
 Notations:
 - $n$: sample size
 - A spatial linear mixed model
