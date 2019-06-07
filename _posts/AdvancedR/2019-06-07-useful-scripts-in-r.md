@@ -27,6 +27,8 @@ detach_package <- function(pkg, character.only = FALSE)
 detach_package(vegan)
 ```
 
+# References
+- [How to unload a package without restarting R](https://stackoverflow.com/questions/6979917/how-to-unload-a-package-without-restarting-r)
 
 ### Install R packages if not installed
 
