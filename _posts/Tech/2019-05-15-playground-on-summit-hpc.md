@@ -17,7 +17,7 @@ sinteractive --partition=shas --qos=normal --time=01:00:00 --ntasks=6 --nodes=1 
 
 For multi-threads, for example `openMP`, use:
 ```
-sinteractive --partition=shas --qos=normal --time=01:00:00 --ntasks=24 --nodes=1 --mem=0
+sinteractive --partition=shas --qos=normal --time=04:00:00 --ntasks=1 --nodes=1 --cpus-per-task=24 --mem=0
 ```
 这里， `ntasks`
 决定了每个node上可以并行的task个数。只有当其大于一，`Rmpi`才能work。
