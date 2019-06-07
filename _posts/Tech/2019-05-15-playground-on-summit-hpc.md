@@ -9,8 +9,15 @@ tags: [HPC]
 In this post, I will show you how to create an interactive playground on Summit HPC. Using this technique, you can test your script before submitting your batch job file.
 
 First, create an interative session.
+
+For `MPI`, use:
 ```
 sinteractive --partition=shas --qos=normal --time=01:00:00 --ntasks=6 --nodes=1 --mem=0
+```
+
+For multi-threads, for example `openMP`, use:
+```
+sinteractive --partition=shas --qos=normal --time=01:00:00 --ntasks=24 --nodes=1 --mem=0
 ```
 这里， `ntasks`
 决定了每个node上可以并行的task个数。只有当其大于一，`Rmpi`才能work。
