@@ -32,7 +32,22 @@ If the allocated memory is not freed when it's no longer necessary it will resul
 
  To eliminate them, C++ provides a destructor member for every class where the programmer should deallocate all the memory it allocates inside the class.
 
+### malloc v.s. new in `c++`
 - 不建议在`c++`中用malloc + free。（new + delete preferred）
 - cast<int> not required (or undesirable) in `c` (c has implicit cast between void\* and other pointer types)
 - we must cast pointer if use malloc in c++ (void\* not recommended in `c++`)
 - if want to use void\* in c++, use `dynamic_cast` or `static_cast`
+
+#### new/delete: cons
+- type safe, no need to cast
+- figures out size automatically, no need to specify
+- throws an exception when it fails, no need to check (null pointer <- returned by malloc when it fails)
+
+
+### Dynamic arrays: `new[]` and `delete[]`
+
+```
+Myclass *myclass;
+my_class = new Myclass [size]; // size must be of type int
+delete [] my_class;
+```
