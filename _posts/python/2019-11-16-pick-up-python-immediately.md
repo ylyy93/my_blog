@@ -37,6 +37,7 @@ In terminal
 * indent (4 spaces)
 * can assign function
 * `g, h = min,max`
+* can pass function name as an argument
 
 ```python
 from math import pi
@@ -145,6 +146,77 @@ Therefore, even if c returns False, the function t will be called. When we call 
 
 By contrast, with_if_statement will never call t if c returns False. Thus, we will only call f, printing 2.
 
+```python
+"""13"""
+True and 13
+```
+- [Short Circuiting](https://cs61a.org/lab/lab01/#short-circuiting)
+
+
+### Assert
+
+```python
+assert 3 > 2, 'Math is broken'
+assert 2 > 3, 'That is false'
+```
+
+### Higher-order functions (good practice!)
+* one function do one thing
+* do not repeat yourself
+* general functions
+
+```python
+from math import pi, sqrt
+
+def area(r,shape_constant):
+    assert r > 0, 'A length must be positive'
+    return r * r * shape_constant
+
+def area_square(r):
+    return area(r,1)
+
+def area_circle(r):
+    return area(r,pi)
+
+def area_hexagon(r):
+    return area(r,3*sqrt(3)/2)      
+```
+
+```python
+
+def identify(k):
+    return k
+
+def cube(k):
+    return pow(k,3)
+
+def summation(n, term):
+    """Sum the first N terms of a sequence.
+
+    >>> summation(5, cube)
+    225
+    """
+    total, k = 0, 1
+    while k <= n:
+        total, k = total + term(k), k + 1
+    return total
+
+def sum_naturals(n):
+    """Sum the first N natural numbers.
+
+    >>> sum_naturals(5)
+    15
+    """
+    return summation(n, identity)
+
+def sum_cubes(n):
+    """Sum the first N cubes of natural numbers.
+
+    >>> sum_cubes(5)
+    225
+    """
+    return summation(n, cube)
+```
 
 ## References
 - [cs61a: Structure and Interpretation of Computer Programs](https://cs61a.org)
