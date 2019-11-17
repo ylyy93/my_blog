@@ -6,6 +6,7 @@ categories: Coding
 tags: [Python]
 ---
 
+
 * case sensitive
 * no `;`
 * indent (4 spaces)
@@ -26,3 +27,6 @@ g, h = min,max
 max = g
 max(f(2,g(h(1,5),3)),4)
 ```
+
+## References
+- [cs61a](https://cs61a.org)
