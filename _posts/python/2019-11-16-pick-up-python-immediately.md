@@ -6,10 +6,23 @@ categories: Coding
 tags: [Python]
 ---
 
-* [composingprograms](http://pythontutor.com/composingprograms.html#mode=edit)
+* case sensitive
+* no ;
+* indent (4 spaces)
+* can assign function
+* `g, h = min,max`
+
 
 ```
 from math import pi
 def area(x):
     return x*x*pi
+```
+
+```
+f = min
+f = max
+g, h = min,max
+max = g
+max(f(2,g(h(1,5),3)),4)
 ```
