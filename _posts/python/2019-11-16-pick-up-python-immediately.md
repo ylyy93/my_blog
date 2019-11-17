@@ -29,12 +29,14 @@ max(f(2,g(h(1,5),3)),4)
 
 ### math functions
 - [math](https://docs.python.org/3/library/math.html)
+
 ```
 from math import sqrt,sin,ceil,floor,isqrt
 ```
 
 ### range
 - [range](https://www.w3schools.com/python/ref_func_range.asp)
+
 ```
 for x in range(6):
     print x
@@ -43,10 +45,10 @@ for x in range(6):
     """
 
 for x in range(3, 6):
-      print(x)
-      """
-      3 4 5
-      """
+    print(x)
+    """
+    3 4 5
+    """
 ```
 
 ### For loop
