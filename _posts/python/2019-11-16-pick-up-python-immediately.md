@@ -8,7 +8,8 @@ tags: [Python]
 
 ### Misc
 `ex.py`
-```
+
+```python
 from operator import floordiv, mod
 
 def divide_exact(n,d):
@@ -37,13 +38,13 @@ In terminal
 * can assign function
 * `g, h = min,max`
 
-```
+```python
 from math import pi
 def area(x):
     return x*x*pi
 ```
 
-```
+```python
 f = min
 f = max
 g, h = min , max
@@ -54,14 +55,14 @@ max(f(2,g(h(1,5),3)),4)
 ### math functions
 - [math](https://docs.python.org/3/library/math.html)
 
-```
+```python
 from math import sqrt,sin,ceil,floor,isqrt
 ```
 
 ### range
 - [range](https://www.w3schools.com/python/ref_func_range.asp)
 
-```
+```python
 for x in range(6):
     print x
     """
@@ -77,7 +78,7 @@ for x in range(3, 6):
 
 ### [Condition](http://composingprograms.com/pages/15-control.html#conditional-statements)
 
-```
+```python
 def absolute_value(x):
     if x < 0:
         return -x
@@ -90,7 +91,7 @@ def absolute_value(x):
 ### Iteration
 #### while
 
-```
+```python
 i, total = 0,0
 while i < 3:
     i = i + 1
@@ -105,7 +106,7 @@ True values in Python
 
 ### `Call` expression v.s. `if` expression
 
-```python3
+```python
 def with_if_statement():
     """
     >>> result = with_if_statement()
