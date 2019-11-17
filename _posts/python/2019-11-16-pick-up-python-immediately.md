@@ -28,6 +28,8 @@ In terminal
 * `python3 -m doctest ex.py`: should see no output
 * `python3 -m doctest -v ex.py`: show details
 * `python3 -i ex.py`: run ex.py and follows interactively
+
+
 ### Basic syntax
 * case sensitive
 * no `;`
@@ -73,11 +75,7 @@ for x in range(3, 6):
     """
 ```
 
-### Iteration
-#### while
-
-
-### if condition
+### [Condition](http://composingprograms.com/pages/15-control.html#conditional-statements)
 
 ```
 def absolute_value(x):
@@ -89,8 +87,62 @@ def absolute_value(x):
         return x          
 ```
 
+### Iteration
+#### while
+
+```
+i, total = 0,0
+while i < 3:
+    i = i + 1
+    total = total + i    
+```
+
+
+
 False values in Python: False, 0, '', None
 True values in Python
+
+
+### `Call` expression v.s. `if` expression
+
+```python3
+def with_if_statement():
+    """
+    >>> result = with_if_statement()
+    2
+    >>> print(result)
+    None
+    """
+    if c():
+        return t()
+    else:
+        return f()
+
+def with_if_function():
+    """
+    >>> result = with_if_function()
+    1
+    2
+    >>> print(result)
+    None
+    """
+    return if_function(c(), t(), f())
+
+def c():
+    return False
+
+def t():
+    print(1)
+
+def f():
+    print(2)
+```
+
+The function with_if_function uses a call expression, which guarantees that all of its operand subexpressions will be evaluated before if_function is applied to the resulting arguments.
+
+Therefore, even if c returns False, the function t will be called. When we call t, we print out 1. Then, when we call f, we will also print 2.
+
+By contrast, with_if_statement will never call t if c returns False. Thus, we will only call f, printing 2.
 
 
 ## References
