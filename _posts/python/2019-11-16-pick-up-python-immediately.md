@@ -6,6 +6,7 @@ categories: Coding
 tags: [Python]
 ---
 
+http://pythontutor.com/composingprograms.html#mode=edit
 
 ```
 from math import pi
