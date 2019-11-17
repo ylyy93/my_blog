@@ -7,7 +7,7 @@ tags: [Python]
 ---
 
 * case sensitive
-* no ;
+* no `;`
 * indent (4 spaces)
 * can assign function
 * `g, h = min,max`
