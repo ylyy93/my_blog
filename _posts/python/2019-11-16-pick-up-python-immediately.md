@@ -6,6 +6,28 @@ categories: Coding
 tags: [Python]
 ---
 
+### Misc
+`ex.py`
+```
+from operator import floordiv, mod
+
+def divide_exact(n,d):
+    """Return the quotient and reminder of dividing N by D.
+    >>> q, r = divide_exact(2013,10)
+    >>> q
+    201
+    >>> r
+    3
+    """
+
+    return floordiv(n,d), mod(n,d)
+```
+
+In terminal
+
+* `python3 -m doctest ex.py`: should see no output
+* `python3 -m doctest -v ex.py`: show details
+* `python3 -i ex.py`: run ex.py and follows interactively
 ### Basic syntax
 * case sensitive
 * no `;`
@@ -51,12 +73,24 @@ for x in range(3, 6):
     """
 ```
 
-### For loop
+### Iteration
+#### while
+
+
+### if condition
+
 ```
-for x in range(2, 6):
-  print(x)
+def absolute_value(x):
+    if x < 0:
+        return -x
+    elif x == 0:
+        return 0
+    else:
+        return x          
 ```
 
+False values in Python: False, 0, '', None
+True values in Python
 
 
 ## References
