@@ -37,7 +37,7 @@ In terminal
 * indent (4 spaces)
 * can assign function
 * `g, h = min,max`
-* can pass function name as an argument
+* can pass function name as an argument, or even output a function
 
 ```python
 from math import pi
@@ -217,6 +217,27 @@ def sum_cubes(n):
     """
     return summation(n, cube)
 ```
+
+### Functions as Return Value
+
+```python
+"""Generalization."""
+
+def make_adder(n):
+    """Return a function that takes one argument K and return
+    K + N.
+
+    >>> add_three = make_adder(3)
+    >>> add_three(4)
+    7
+    """
+
+    def adder(k):
+        return k + n
+    return adder
+```
+
+
 
 ## References
 - [cs61a: Structure and Interpretation of Computer Programs](https://cs61a.org)
