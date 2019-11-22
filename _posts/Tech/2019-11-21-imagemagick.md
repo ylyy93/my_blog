@@ -107,3 +107,31 @@ convert logo: -resize '100x200' notThinWiz.png
 convert logo: -resize '100x200^' biggerNotThinWiz.png
 convert logo: -resize '100x200!' dochThinWiz.png
 ```
+
+### 只指定宽或者高
+```bash
+convert logo: -resize '100' wiz1.png
+convert logo: -resize 'x200' wiz2.png
+convert logo: -resize '100x200>' wiz3.png
+convert logo: -resize '100x200<' wiz4.png
+```
+
+### 图像定位中的偏移
+
+指定这个矩形区域的宽和高, 还需要指定它的一个起始点(左上角的点). 下面的第一个例子中, 我们指定了一个 100×200 的区域, 位置在 x=10, y=20, 或者我们应该写成 (x,y) = (10,20).
+
+```bash
+convert logo: -region '100x200+10+20' -negate wizNeg1.png
+convert logo: -region '100x200-10+20' -negate wizNeg2.png
+convert logo: -gravity center -region '100x200-10+20' -negate wizNeg3.png
+```
+
+
+
+
+
+
+
+## References
+
+- [ImageMagick命令行使用方法](https://www.zouyesheng.com/imagemagick.html)
