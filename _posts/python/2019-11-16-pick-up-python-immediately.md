@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Pick up Python immediately
+title: Pick up Python immediately (cite from cs61a)
 date: 2019-11-16 17:12 -0800
 categories: Coding
 tags: [Python]
@@ -237,6 +237,15 @@ def make_adder(n):
     return adder
 ```
 
+### Lambda Expressions
+
+```python
+square = lambda x: x * x
+```
+
+### Higher-order Functions
+A function that takes a function as an argument value or 
+A function that returns a function as a return value
 
 
 ## References

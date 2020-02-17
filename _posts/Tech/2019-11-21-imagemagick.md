@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post0
 title: Imagemagick
 date: 2019-11-21 20:57 -0800
 categories: Coding
