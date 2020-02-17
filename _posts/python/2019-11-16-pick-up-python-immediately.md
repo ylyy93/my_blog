@@ -6,7 +6,10 @@ categories: Coding
 tags: [Python]
 ---
 
-### Misc
+### STEP 1: Pick YOUR IDE
+My choice is just `iterm2` + `MacVim`
+![ide](https://ylyy93.github.io/my_blog/assets/img/ide.png)
+
 `ex.py`
 
 ```python
