@@ -19,52 +19,57 @@ tags: [Linux]
 In short, remember `y`(copy),`p`(paste),`d`(cut).
 
 #### Normal mode
-`h`: move left
-`j`: move down
-`k`: move up
-`l`: move right
-`w`: start of words
-`e`: end of words
-`b`: jump back by workds
-`0`: start of line
-`$`: end of line
-`G`: Go To command
+
+* `j`: move down
+* `k`: move up
+* `l`: move right
+* `w`: start of words
+* `e`: end of words
+* `b`: jump back by workds
+* `0`: start of line
+* `$`: end of line
+* `G`: Go To command
 
 
 ##### Editing
-`cc`: change (replace) an entire line
-`cw`: change (replace) to the end of word
-`c$`: change (replace) to the endo of line
-`s`: delete character at cursor and subsitute text
-`S`: delete line      at cursor and subsitute text
-`u`: undo
-`.`: repeat last command
+
+* `cc`: change (replace) an entire line
+* `cw`: change (replace) to the end of word
+* `c$`: change (replace) to the endo of line
+* `s`: delete character at cursor and subsitute text
+* `S`: delete line      at cursor and subsitute text
+* `u`: undo
+* `.`: repeat last command
 
 ##### Cut and Paste
-`yy`: yank (copy) a line
-`2yy`: yank two lines
-`yw`: yank word
-`y$`: yank to end of line
-`p`: paste hte clipboard after cursor
-`P`: paste before the cursor
-`dd`: delete a line
-`dw`: delete current word
-`x`: delete currect character
+
+* `yy`: yank (copy) a line
+* `2yy`: yank two lines
+* `yw`: yank word
+* `y$`: yank to end of line
+* `p`: paste hte clipboard after cursor
+* `P`: paste before the cursor
+* `dd`: delete a line
+* `dw`: delete current word
+* `x`: delete currect character
 
 ##### Search/Replace
-/`pattern`: search
-`?pattern`: search backword
-`:%s/old/new/gc`: replace all old with new throughout file with confirmation
+
+* /`pattern`: search
+* `?pattern`: search backword
+* `:%s/old/new/gc`: replace all old with new throughout file with confirmation
 
 #### Insert mode
-`i`: start insert mode
-`ESC`: exsit insert mode
+
+* `i`: start insert mode
+* `ESC`: exsit insert mode
 
 #### Visual mode
-`v`: start visual mode
-`V`: start Linewise visual mode
-`Ctrl+v`: start visual block mode
-`Esc`: exit visual mode
+
+* `v`: start visual mode
+* `V`: start Linewise visual mode
+* `Ctrl+v`: start visual block mode
+* `Esc`: exit visual mode
 
 ## References
 - [Learning the vi Editor/Vim/Modes](https://en.wikibooks.org/wiki/Learning_the_vi_Editor/Vim/Modes)
