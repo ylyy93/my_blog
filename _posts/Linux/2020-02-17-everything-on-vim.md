@@ -74,3 +74,4 @@ In short, remember `y`(copy),`p`(paste),`d`(cut).
 
 ## References
 - [Learning the vi Editor/Vim/Modes](https://en.wikibooks.org/wiki/Learning_the_vi_Editor/Vim/Modes)
+- [VIM Keyboard Shortcuts](http://www.keyxl.com/aaa8263/290/VIM-keyboard-shortcuts.htm)
