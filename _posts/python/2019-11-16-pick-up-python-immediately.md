@@ -8,7 +8,7 @@ tags: [Python]
 
 ### STEP 1: Pick YOUR IDE
 The combo `iterm2` + `MacVim` (type `mvim` in iterm2) is good enough for me.
-![ide](https://ylyy93.github.io/my_blog/assets/img/ide.png)
+![ide](https://ylyy93.github.io/my_blog/assets/img/ide.jpg)
 
 Some useful shortcuts:
 
