@@ -7,8 +7,16 @@ tags: [Python]
 ---
 
 ### STEP 1: Pick YOUR IDE
-My choice is just `iterm2` + `MacVim`
+My choice is just `iterm2` + `MacVim` (type `mvim` in iterm2)
 ![ide](https://ylyy93.github.io/my_blog/assets/img/ide.png)
+
+Some useful shortcuts:
+
+*
+* `y`(yank): copy
+* `d`(delete): cut
+* `p`(paste): paste
+
 
 `ex.py`
 
