@@ -7,6 +7,7 @@ tags: [Linux]
 ---
 
 ### Modes
+
 | Name  | Description  |
 |---|---|
 | `normal`  |  For navigation and manipulation of text. This is the mode that vim will usually start in, which you can usually get back to with ESC. |
