@@ -7,12 +7,11 @@ tags: [Python]
 ---
 
 ### STEP 1: Pick YOUR IDE
-The combo `iterm2` + `MacVim` (type `mvim` in iterm2) is good enough for me.
+The combo `iterm2` + `MacVim` (type ```mvim` in iterm2) is good enough for me.
 ![ide](https://ylyy93.github.io/my_blog/assets/img/ide.jpg)
 
 Some useful shortcuts:
 
-*
 * `y`(yank): copy
 * `d`(delete): cut
 * `p`(paste): paste
@@ -112,8 +111,8 @@ while i < 3:
 
 
 
-False values in Python: False, 0, '', None
-True values in Python
+- False values in Python: False, 0, '', None
+- True values in Python
 
 
 ### `Call` expression v.s. `if` expression
@@ -255,8 +254,8 @@ square = lambda x: x * x
 ```
 
 ### Higher-order Functions
-A function that takes a function as an argument value or 
-A function that returns a function as a return value
+- A function that takes a function as an argument value or 
+- A function that returns a function as a return value
 
 
 ## References
