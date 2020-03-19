@@ -25,9 +25,29 @@ You need a control treatment in your experiment!
 > You make inference to the population from which you sample.
 
 ### Principle of Experimental Manipulation
+> In designed experiments (“scientific studies”) you can make inference about causal relationships. In observational studies you cannot.
 
 ##### Designed Experiments:
 Studies in which the experimenter **manipulates** the experimental conditions or “treatments” experienced by the experimental units using a randomization scheme. (Sometimes called “Scientific Studies” or “Experimental Studies”).
 
 ##### Observational Studies:
 Studies in which the experimenter **observes or measures**, but doesn’t manipulate the conditions experienced by the experimental units and does not have control over which experimental units receive which treatment or condition.
+
+### Principle of Blocking
+**Def**: An **experimental unit (EU)** is the object (e.g. subject, plant, pot, test tube) that is randomly assigned to a treatment.
+
+**Def**: A **block** is a grouping of experimental units (EUs) into (relatively) homogeneous groups.
+
+**Idea of Blocking**: Assign experimental units (EU’s) to blocks so that EU’s in the same block are **as alike as possible**. Some blocks will have higher than average values; some blocks will have lower than average values. Comparison of treatment means will be more accurate, because each treatment has an equal number (=1) of observations in each block.
+
+### Principle of Factorial Experimentation
+> Efficiency can be gained by using factorial treatment structures because:
+1. If there is an interaction, you can test it and study it.
+2. If there is no interaction, you can more accurately estimate the main effect of each factor by averaging over the levels of the other factor. (Each estimate uses all the data!)
+
+### Principle of Randomization
+> Whenever possible the assignment of treatments to experimental units should be done at random: (1) Randomization avoids bias (easy), and (2) the randomization justifies the statistical hypothesis test (hard).
+
+Randomization made the estimate of treatment effect unbiased.
+
+(R. A. Fisher, 1935): Randomization does not make error terms independent, but randomization allows us to do a valid “randomization test”. The normal analysis that assumes, independent errors is generally a good approximation to the randomization test.
