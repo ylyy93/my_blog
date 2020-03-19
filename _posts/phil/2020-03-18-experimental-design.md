@@ -79,7 +79,7 @@ $$
 \end{array}\right)
 $$
 
-##### Method 2: Omit the first of the "effects" columns (the R lm function default):
+##### Method 2: Omit the first of the "effects" columns (the R lm function default `contr.treatment`):
 * $\mu$ is the mean for trt 1
 * the $\tau$'s are the deviations of the other trt means from the trt 1 mean.
 
@@ -99,7 +99,7 @@ $$
 \end{array}\right)
 $$
 
-##### Method 3: Omit the last of the “effects” (not the default, but R can do this.)
+##### Method 3: Omit the last of the “effects” (not the default, but R can do this. `contr.SAS`)
 * $\mu$ is the mean for trt 3
 * the $\tau$'s are the deviations of the other trt means from the trt 3 mean.
 
@@ -119,7 +119,7 @@ $$
 \end{array}\right)
 $$
 
-##### Method 4: Constrain $\sum \tau_i = 0$ and replace $\tau_3$ with $-\tau_1-\tau_2$ (MINITAB, SPSS, and some SAS procedures, model fit in JMP do this; R can also be made to do this)
+##### Method 4: Constrain $\sum \tau_i = 0$ and replace $\tau_3$ with $-\tau_1-\tau_2$ (MINITAB, SPSS, and some SAS procedures, model fit in JMP do this; R can also be made to do this `contr.sum`)
 
 $$
 \left(\begin{array}{ccc}
@@ -141,7 +141,7 @@ $$
 * the $\tau$'s are the deviations of the individual trt means from the average of the trt means.
 (This is called the "sum-to-zero" parameterization)
 
-##### Method 5: “Orthogonal Polynomials”: (R default for ordinal predictors)
+##### Method 5: “Orthogonal Polynomials”: (R default for ordinal predictors `contr.poly`)
 
 $$
 \left(\begin{array}{ccc}
@@ -159,7 +159,7 @@ $$
 \end{array}\right)
 $$
 
-##### Method 6: The "Helmert" parameterization: compares each treatment level to the average of the treatment levels that follow it.
+##### Method 6: The "Helmert" parameterization: compares each treatment level to the average of the treatment levels that follow it. (`contr.helmert`)
 
 $$
 \left(\begin{array}{ccc}
@@ -398,4 +398,114 @@ F-statistic: 3.936 on 2 and 12 DF,  p-value: 0.0485
 [1,] -7.071068e-01  0.4082483
 [2,] -7.850462e-17 -0.8164966
 [3,]  7.071068e-01  0.4082483
+> contr.helmert(3)
+  [,1] [,2]
+1   -1   -1
+2    1   -1
+3    0    2
+```
+
+##### Set up your own matrix of contrasts and obtain CI's
+```
+> contrasts(trt) <- cbind(c(2,-1,-1)/3,c(0,0.5,-0.5))
+> g <- lm(drywt~trt)
+> model.matrix(g)
+   (Intercept)       trt1 trt2
+1            1  0.6666667  0.0
+2            1  0.6666667  0.0
+3            1  0.6666667  0.0
+4            1  0.6666667  0.0
+5            1  0.6666667  0.0
+6            1 -0.3333333  0.5
+7            1 -0.3333333  0.5
+8            1 -0.3333333  0.5
+9            1 -0.3333333  0.5
+10           1 -0.3333333  0.5
+11           1 -0.3333333 -0.5
+12           1 -0.3333333 -0.5
+13           1 -0.3333333 -0.5
+14           1 -0.3333333 -0.5
+15           1 -0.3333333 -0.5
+> confint(g,level = 0.95)
+                 2.5 %      97.5 %
+(Intercept)  0.9327339  1.12193274
+trt1        -0.4306756 -0.02932436
+trt2        -0.3677203  0.09572027
+> summary(g)
+
+Call:
+lm(formula = drywt ~ trt)
+
+Residuals:
+   Min     1Q Median     3Q    Max
+-0.284 -0.080 -0.002  0.136  0.188
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  1.02733    0.04342  23.662 1.94e-11 ***
+trt1        -0.23000    0.09210  -2.497   0.0281 *  
+trt2        -0.13600    0.10635  -1.279   0.2252    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.1682 on 12 degrees of freedom
+Multiple R-squared:  0.3961,	Adjusted R-squared:  0.2955
+F-statistic: 3.936 on 2 and 12 DF,  p-value: 0.0485
+```
+
+#### Dealing with ordered treatment levels
+```
+> trt <- ordered(trt)
+> g <- lm(drywt~trt)
+> model.matrix(g)
+   (Intercept)         trt.L      trt.Q
+1            1 -7.071068e-01  0.4082483
+2            1 -7.071068e-01  0.4082483
+3            1 -7.071068e-01  0.4082483
+4            1 -7.071068e-01  0.4082483
+5            1 -7.071068e-01  0.4082483
+6            1 -7.850462e-17 -0.8164966
+7            1 -7.850462e-17 -0.8164966
+8            1 -7.850462e-17 -0.8164966
+9            1 -7.850462e-17 -0.8164966
+10           1 -7.850462e-17 -0.8164966
+11           1  7.071068e-01  0.4082483
+12           1  7.071068e-01  0.4082483
+13           1  7.071068e-01  0.4082483
+14           1  7.071068e-01  0.4082483
+15           1  7.071068e-01  0.4082483
+> # Confidence intervals for individual means
+> g <- lm(drywt~trt -1)
+> confint(g,level=0.95) # t-based CI's for lm objects
+        2.5 %   97.5 %
+trt1 0.710149 1.037851
+trt2 0.872149 1.199851
+trt3 1.008149 1.335851
+
+> pairwise.t.test(drywt,trt, p.adjust.method="none")  # does not use the model
+
+	Pairwise comparisons using t tests with pooled SD
+
+data:  drywt and trt
+
+  1     2    
+2 0.154 -    
+3 0.016 0.225
+
+P value adjustment method: none
+```
+
+#### Confidence intervals for contrasts the hard way: compare trt 1 to the average of trt 2 and trt 3.
+```
+> c <- c(1,-0.5,-0.5)
+> est <- t(c)%*%coef(g)
+> se.c <- sqrt(t(c)%*%vcov(g)%*%c)
+> tval <- qt(0.975,df.residual(g))
+> lcl <- est-tval*se.c
+> ucl <- est+tval*se.c
+> tmp <- round(c(est,lcl,ucl),3)
+> names(tmp) = c("estimate","lower","upper")
+> tmp
+estimate    lower    upper
+  -0.230   -0.431   -0.029
 ```
