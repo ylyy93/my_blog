@@ -184,5 +184,6 @@ $$
 ### What does the `lm` function in R do?
 
 By default:
+
 (1) For unordered “factor” variables (called "class" variables in SAS) lm uses the "treatment" parameterization (Method 2), which leaves out the column associated with the first (alphabetically) of the factor levels.
 (2) For ordered factor variables lm uses the "poly" set of orthogonal polynomial contrasts (Method 5, but each column multiplied by a constant).
