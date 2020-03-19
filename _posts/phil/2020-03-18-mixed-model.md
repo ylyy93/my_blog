@@ -152,4 +152,66 @@ It is not “balanced” in the sense of the RCB, in which block effects can tha
 In the fixed block analysis, to test trt effects use Type III SS $\noteq$ Type I SS.
 
 ###### Example: The Pillow Data
-Eight experimental pillows and a standard control pillow (A, B, C, D, E, F, G, H, I) are tested by potential customers (t=9). Because it was believed that more accurate results would be obtained if individuals were asked to test only three pillows at a time, pillows were tested in groups of three (k=3). Each individual tested all twelve (b=12) groups of pillows. The assignment of pillows to groups was a BIBD. The response is total firmness score for all testers. The design was constructed as follows:
+Eight experimental pillows and a standard control pillow (A, B, C, D, E, F, G, H, I) are tested by potential customers (t=9). Because it was believed that more accurate results would be obtained if individuals were asked to test only three pillows at a time, pillows were tested in groups of three (k=3). Each individual tested all twelve (b=12) groups of pillows. The assignment of pillows to groups was a BIBD. The response is total firmness score for all testers.
+
+```
+proc mixed method=type1;
+class blk pillow;
+model firmness=pillow;
+random blk;
+*lsmeans pillow /pdiff adjust=tukey;
+run;
+```
+* `method`: type1, type3, MIVQUE0, REML(default), ML
+*  REML is the default method in SAS `Proc Mixed` and SAS `Proc GLIMMIX`, `lmer` (lme4 package in R), and `lme` (nlme package in R).
+* For balanced (RCB, not BIBD) factorial models it produces the same variance estimates as the ANOVA method, as long as no variance estimate from the ANOVA method is negative.
+* If during the REML optimization an estimated variance parameter becomes zero, the program fixes its estimate at zero and proceeds to optimize w.r.t. the other variance parameters (except if you use the `parms/nobound;` statement in SAS).
+* SAS allows you to start the optimization with a grid search:
+```
+parms (0 to 3.0 by 0.1) (25 to 40 by 1);
+```
+(The option: `/noiter;` tells it to stop at the grid search).
+* REML estimators have the same asymptotic properties as ML.
+* REML estimators are commonly used for unbalanced models.
+* Remember, you are assuming **normality** when you use REML.
+* Model selection for the variance parameters ($\theta$) can be done based on AIC, AICC, BIC, etc. if you are comparing models that have **the same fixed effects** (i.e. the same C(X)). (It is a common mistake to compare AIC’s in models with different X’s.)
+
+```r
+blk <- factor(blk)
+install.packages("lme4")
+library(lme4)
+h <- lmer(firmness ~ pillow + (1|blk))
+summary(h)
+anova(h)
+# simulation based Tukey comparisons of lsmeans
+install.packages("multcomp")
+library(multcomp)
+dhh <- glht(h, linfct = mcp(pillow = "Tukey"))
+summary(dhh)  # Gives the adjusted p-values
+
+install.packages("lsmeans")
+library(lsmeans)
+lsmeans(h,pairwise~pillow) # Default d.f. is Satterthwaite with Tukey adjusted p-values
+
+# The Kenward-Roger method is preferred, but takes more time. Again the default is Tukey adjusted p- values
+lsmeans(h,pairwise~pillow, mode="kenward-roger")
+
+# To compare models with different fixed effects using the Kenward-Roger adjusted F-test, use the KRmodcomp function in the pbkrtest package. It automatically changes both models to REML=TRUE, if they are not already fitting using REML=TRUE.
+install.packages("pbkrtest")
+library(pbkrtest)
+k <- lmer(firmness ~ (1|blk)) # k is the “small” or “reduced” model
+KRmodcomp(h,k)
+
+# To compare models using the Parametric Bootstrap of the likelihood ratio test statistic, use the KRmodcomp function in the pbkrtest package. It automatically changes both models to REML=FALSE, if they are not already fitting using ML. (REML likelihoods are not comparable between models with different fixed effects.)
+PBmodcomp(h,k)
+
+# The number of Bootstrap resamples can be changed (note the time).
+PBmodcomp(h,k, nsim=10000)
+```
+
+* Use lm to analyze fixed block models in R. **Make sure “treatment” is added last**, so that treatments will be adjusted for blocks.
+* For fixed or random block models, don’t use TukeyHSD, or any of the “tables” commands to compare treatments.
+* For random block models use the `lmer` function in the `lme4` package. This package does not do t-tests or F-tests, because is does not estimate df error.
+4. Follow the `lmer` function with functions in `multcomp`, `lsmeans`, and `lmerTest` packages to test effects and compare treatments. `lmerTest` and `lsmeans` have options to call the `pbkrtest` package to do the `Kenward-Roger` approximation, which is recommended.
+5. I use the `KRmodcomp` in the `pbkrtest` package to compare models.
+6. The `lme` funtion in the old `nlme` package fits mixed models, but it is very awkward for blocked designs. However, it has “containment” method F-tests. Also, `lme4` does not allow correlated errors, which become important later in the “repeated measures” designs.
