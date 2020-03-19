@@ -58,4 +58,25 @@ Randomization made the estimate of treatment effect unbiased.
 
 Fifteen pots (one plant per pot) randomly assigned three trts (A, B, C), without restriction “Completely Randomized Design” (CRD). Five pots per trt.
 
-$Y_{ij} = \mu + \tau_i + \varepsilon_{ij}$
+$$Y_{ij} = \mu + \tau_i + \varepsilon_{ij}.$$
+
+##### Method 1:  Omit the intercept ($\mu$) and use the "means" parameterization of the same model, relabeling the $\tau$'s as $\mu$'s:
+The parameters are treatment means.
+\left(\begin{array}{ccc}
+1 & 0 & 0\\
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1\\
+0 & 0 & 1\\
+\end{array}\right)
+
+##### Method 2: Omit the first of the "effects" columns (the R lm function default):
+* $\mu$ is the mean for trt 1
+* the $\tau$'s are the deviations of the other trt means from the trt 1 mean.
+
+##### Method 3: Omit the last of the “effects” (not the default, but R can do this.)
+* $\mu$ is the mean for trt 3
+* the $\tau$'s are the deviations of the other trt means from the trt 3 mean.
+
+##### Method 4: Constrain $\Sum \tau_i = 0$ and replace $\tau_3$ with $-\tau_1-\tau_2$ (MINITAB, SPSS, and some SAS procedures, model fit in JMP do this; R can also be made to do this)
