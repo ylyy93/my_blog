@@ -28,9 +28,9 @@ $$
 * $i=1,\ldots,a=4$ (lot), $j=1,\ldots,r=4$ (block), $k=1,\ldots,b=4$ (seed trt)
 * $\mu, \alpha_i, \beta_k$ and $(\alpha\beta)_{ik}$ are fixed effects
 * $\tau_j \sim N(0,\sigma^2_{\tau})$
-* $(\alpha\tau)_{ij} \sim N(0,\sigma_{\alpha\tau}^2)$
+* $(\alpha \tau)_{ij} \sim N(0,\sigma_{\alpha\tau}^2)$
 * $\varepsilon_{ijk} \sim N(0,\sigma^2)$
-* $\tau_j$, $(\alpha\tau)_{ij}$, $\varepsilon_{ijk}$ are all independent.
+* $\tau_j$, $(\alpha \tau)_{ij}$, $\varepsilon_{ijk}$ are all independent.
 
 ##### Primary interests:
 seed trt effects, lot effects and ther interactions. (We are not interested in σ2, σ2 and σ2, except
@@ -99,5 +99,5 @@ subjects per group. Each subject is measured sequentially over b=6 time periods.
 * $y_{ijk}$: $i=1,2$ (trt), $j=1,\ldots,r$ (subject within trt), $k=1,\ldots,6$ (period)
 
 $$
-y_{ijk} = 
+y_{ijk} =
 $$
