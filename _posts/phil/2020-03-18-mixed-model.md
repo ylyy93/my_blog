@@ -54,3 +54,42 @@ $$
 * $(\alpha\beta\tau)_{ijk}\sim N(0,\sigma^2_{\alpha\beta\tau})$
 * $\varepsilon_{ijkl} \sim N(0,\sigma^2)$
 * $\tau_j, (\alpha\tau)_{ij},(\alpha\beta\tau)_{ijk}, \varepsilon_{ijkl}$ are all independent.
+
+
+### The "Random Coefficients" Model
+Grain yields for $t=10$ varieties of winter wheat planted in 60 field plots (r=6/var.).
+Key predictor of yield $(Y_{ij})$ is pre-plant moisture in top 36 inches of soil $(x_{ij})$.
+
+Responses for $j$th plot of the $i$th variety:
+$$
+Y_{ij} = \alpha + \beta x_{ij} + a_i + b_ix_{ij} + \varepsilon_{ij}
+$$
+
+$$
+\left(\begin{array}{c}
+a_i \\
+b_i
+\end{array}\right) \sim N
+\left(\left(\begin{array}{c}
+0 \\
+0
+\end{array}\right),G\right),
+$$
+where
+$$ G =
+\left(\begin{array}{cc}
+\sigma^2_a & \sigma_{ab}\\
+\sigma_{ab} & \sigma^2_{b}
+\end{array}\right)
+$$
+$$
+\left(\begin{array}{c}
+a_i \\
+b_i
+\end{array}\right)
+$$ independent across varieties
+$\varepsilon_{ij}\sim N(0,\sigma^2)$ i.i.d.
+
+Each variety has its own random regression line, which centers around the average regression line.
+
+### 
