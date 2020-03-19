@@ -214,4 +214,94 @@ options(contrasts=c("","")) # set the choices for unordered and ordered factors,
 13   3  1.17
 14   3  1.22
 15   3  1.12
+
+> trt <- factor(trt)
+> g <- lm(drywt~trt)
+> summary(g)
+
+Call:
+lm(formula = drywt ~ trt)
+
+Residuals:
+   Min     1Q Median     3Q    Max
+-0.284 -0.080 -0.002  0.136  0.188
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   0.8740     0.0752  11.622  6.9e-08 ***
+trt2          0.1620     0.1064   1.523    0.154    
+trt3          0.2980     0.1064   2.802    0.016 *  
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.1682 on 12 degrees of freedom
+Multiple R-squared:  0.3961,	Adjusted R-squared:  0.2955
+F-statistic: 3.936 on 2 and 12 DF,  p-value: 0.0485
+
+> model.matrix(g)
+   (Intercept) trt2 trt3
+1            1    0    0
+2            1    0    0
+3            1    0    0
+4            1    0    0
+5            1    0    0
+6            1    1    0
+7            1    1    0
+8            1    1    0
+9            1    1    0
+10           1    1    0
+11           1    0    1
+12           1    0    1
+13           1    0    1
+14           1    0    1
+15           1    0    1
+
+> contrasts(trt)
+  2 3
+1 0 0
+2 1 0
+3 0 1
+
+> g <- lm(drywt~trt -1)
+> model.matrix(g)
+   trt1 trt2 trt3
+1     1    0    0
+2     1    0    0
+3     1    0    0
+4     1    0    0
+5     1    0    0
+6     0    1    0
+7     0    1    0
+8     0    1    0
+9     0    1    0
+10    0    1    0
+11    0    0    1
+12    0    0    1
+13    0    0    1
+14    0    0    1
+15    0    0    1
+```
+
+#### `options(contrasts = c("contr.treatment", "contr.poly"))`
+```
+> options(contrasts = c("contr.treatment", "contr.poly"))
+> g <- lm(drywt~trt)
+> model.matrix(g)
+   (Intercept) trt2 trt3
+1            1    0    0
+2            1    0    0
+3            1    0    0
+4            1    0    0
+5            1    0    0
+6            1    1    0
+7            1    1    0
+8            1    1    0
+9            1    1    0
+10           1    1    0
+11           1    0    1
+12           1    0    1
+13           1    0    1
+14           1    0    1
+15           1    0    1
 ```
