@@ -50,10 +50,10 @@ $$
 * $i=1,\ldots,a$ (level of A), $j=1,\ldots,r$ (block), $k=1,\ldots,b$ (level of B), $l=1,\ldots,c$ (level of C).
 * $\mu, \alpha_i, \beta_k, (\alpha\beta)_{ik}, \gamma_l, (\alpha\gamma)_{il}, (\beta\gamma)_{kl}, (\alpha\beta\gamma)_{ikl}$ are fixed effects
 * $\tau_j \sim N(0,\sigma^2_{\tau})$
-* $(\alpha\tau)_{ij}\sim N(0,\sigma^2_{\alpha\tau})$
-* $(\alpha\beta\tau)_{ijk}\sim N(0,\sigma^2_{\alpha\beta\tau})$
+* $(\alpha\tau)_{ij} \sim N(0,\sigma^2_{\alpha\tau})$
+* $(\alpha\beta\tau)_{ijk} \sim N(0,\sigma^2_{\alpha\beta\tau})$
 * $\varepsilon_{ijkl} \sim N(0,\sigma^2)$
-* $\tau_j, (\alpha\tau)_{ij},(\alpha\beta\tau)_{ijk}, \varepsilon_{ijkl}$ are all independent.
+* $\tau_j, (\alpha\tau)_{ij}, (\alpha\beta\tau)_{ijk}, \varepsilon_{ijkl}$ are all independent.
 
 
 ### The "Random Coefficients" Model
