@@ -27,7 +27,7 @@ y_{ijk} = \mu + \alpha_i + \tau_j + (\alpha\tau)_{ij} + \beta_k + (\alpha\beta)_
 $$
 * $i=1,\ldots,a=4$ (lot), $j=1,\ldots,r=4$ (block), $k=1,\ldots,b=4$ (seed trt)
 * $\mu, \alpha_i, \beta_k$ and $(\alpha\beta)_{ik}$ are fixed effects
-* #$\tau_j \sim N(0,\sigma^2_{\tau})$#
+* $$\tau_j \sim N(0,\sigma^2_{\tau})$$
 * $$(\alpha\tau)_{ij} \sim N(0,\sigma_{\alpha\tau}^2)$$
 * $$\varepsilon_{ijk} \sim N(0,\sigma^2)$$
 * $\tau_j$, \[(\alpha\tau)_{ij}\], $\varepsilon_{ijk}$ are all independent.
