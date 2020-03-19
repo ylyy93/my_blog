@@ -531,6 +531,19 @@ $$(X^{\top}X)^{-} = \left(\begin{array}{cc}
 $$
 
 ##### Proc GLM options/statements
+```
+proc glm data=geranium;
+class trt;
+model drywt=trt /solution xpx i e;*we will discuss these options;
+means trt / tukey; * raw trt means, with a 'Tukey’ comparison;
+lsmeans trt /pdiff; * lsmeans are mu+tau_i, the estimated trt
+means from the model (here same as raw means);
+estimate 'trt a' trt 1 0 0;
+estimate 'trt a again' intercept 1 trt 1 0 0;
+estimate 'mean' intercept 1;
+estimate 'mean again' intercept 3 trt 1 1 1/divisor=3; run;
+```
+
 * `solution`: parameter estimates
 * `predicted`: predicted values for the model
 * `means`: simple treatment means, not adjusted anyway
@@ -561,3 +574,21 @@ If $l_{p\times 1}^{\top} \beta= l_1\beta_1 + \ldots + l_p\beta_p$ is an "estimab
 2. $l^{\top}\hat{\beta}$ has minimum variance among linear unbiased estimators of $l^{\top}\beta$.
 
 **In the Oneway model any sum or comparison of treatment means is estimable!**
+
+#### What is the difference between eliminating a parameter and requiring that its estimate be zero?
+
+What is the practical difference?
+
+1. For a full rank matrix X, not needed.
+2. The dimensionality of the parameter vector (In our example: 3 for R, 4 for SAS)
+3. For the non-full rank one-way parameterization one of many possible solutions
+to the normal equations must be selected.
+4. Estimates and hypothesis tests are possible only for estimable linear functions of
+the parameters; individual parameters are not estimable.
+5. Why doesn’t SAS eliminate parameters: In multi-factor models it is easier to specify treatment mean comparisons if no parameters are eliminated!
+
+Which parameterization would you want to use?
+
+Most programs print tables of parameter estimates, se’s, t-tests, and CI’s for the parameters. It would be convenient if the questions of interest were answered by that table without the need to specify additional functions of parameters.
+
+We want to be able to easily specify comparisons of interest as functions of the parameters. That is generally easier to do if all levels of factors are treated symmetrically.
