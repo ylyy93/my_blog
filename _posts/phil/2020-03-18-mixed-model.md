@@ -149,7 +149,7 @@ with each other treatment the same number of times ($\lambda$). In our example $
 
 It is not “balanced” in the sense of the RCB, in which block effects can that each combination of trt and block occurs the same number of times.
 
-In the fixed block analysis, to test trt effects use Type III SS $\noteq$ Type I SS.
+In the fixed block analysis, to test trt effects use Type III SS $\neq$ Type I SS.
 
 ###### Example: The Pillow Data
 Eight experimental pillows and a standard control pillow (A, B, C, D, E, F, G, H, I) are tested by potential customers (t=9). Because it was believed that more accurate results would be obtained if individuals were asked to test only three pillows at a time, pillows were tested in groups of three (k=3). Each individual tested all twelve (b=12) groups of pillows. The assignment of pillows to groups was a BIBD. The response is total firmness score for all testers.
