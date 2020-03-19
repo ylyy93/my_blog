@@ -6,7 +6,7 @@ categories: Statistics
 tags: [sas]
 ---
 
-## L1: Introduction to Six Principles of Experimental Design
+# L1: Introduction to Six Principles of Experimental Design
 
 ### Summary
 1. Principle of Comparative Experimentation
