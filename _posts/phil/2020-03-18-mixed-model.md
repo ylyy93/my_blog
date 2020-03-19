@@ -126,3 +126,25 @@ $$ Cov
 \rho^5\sigma^2 & \rho^4\sigma^2 & \rho^3\sigma^2 & \rho^2\sigma^2 & \rho^1\sigma^2 &       \sigma^2  
 \end{array}\right)
 $$
+
+1. This model does assume homogeneity of variance.
+2. The correlation between two measurements on the same subject decreases
+exponentially with the number of time periods separating the two measurements.
+
+
+# L2: Incomplete Block Designs and Random Blocks
+$$
+Y_{ij} = \mu + \tau_i + \beta_j + \varepsilon_{ij}
+$$
+What these models have in common is that comparison of treatment means does not eliminate block effects, as it does in the randomized complete block design.
+
+Basic problem: What to do if there are more treatments than the “natural” number of EU’s in a block.
+
+Example: Trts are: A, B, C We want to use “lab day” as a block, but the lab can do only 2 runs per day. The “natural” block size is 2.
+
+This design is “balanced” in the sense that each treatment occurs in a block
+with each other treatment the same number of times ($\lambda$). In our example $\lambda=1$.
+
+It is not “balanced” in the sense of the RCB, in which block effects can that each combination of trt and block occurs the same number of times.
+
+In the fixed block analysis, to test trt effects use Type III SS $\noteq$ Type I SS.
