@@ -72,9 +72,9 @@ $$
 0 & 0 & 1
 \end{array}\right)
 \left(\begin{array}{c}
-$\mu_1$ \\
-$\mu_2$ \\
-$\mu_3$
+\mu_1 \\
+\mu_2 \\
+\mu_3
 \end{array}\right)
 $$
 
@@ -91,9 +91,9 @@ $$
 1 & 0 & 1
 \end{array}\right)
 \left(\begin{array}{c}
-$\mu$ \\
-$\tau_2$ \\
-$\tau_3$
+\mu \\
+\tau_2 \\
+\tau_3
 \end{array}\right)
 $$
 
@@ -111,9 +111,9 @@ $$
 1 & 0 & 0
 \end{array}\right)
 \left(\begin{array}{c}
-$\mu$ \\
-$\tau_1$ \\
-$\tau_2$
+\mu \\
+\tau_1 \\
+\tau_2
 \end{array}\right)
 $$
 
@@ -128,9 +128,9 @@ $$
 1 & -1 & -1
 \end{array}\right)
 \left(\begin{array}{c}
-$\mu$ \\
-$\tau_1$ \\
-$\tau_2$
+\mu \\
+\tau_1 \\
+\tau_2
 \end{array}\right)
 $$
 
@@ -150,11 +150,11 @@ $$
 1 & 1 & 1
 \end{array}\right)
 \left(\begin{array}{c}
-$\mu$ \\
-$\tau_1$ \\
-$\tau_2$
+\mu \\
+\tau_1 \\
+\tau_2
 \end{array}\right)
 $$
 
 Parameter Interpretation:
-1. 
+1.
