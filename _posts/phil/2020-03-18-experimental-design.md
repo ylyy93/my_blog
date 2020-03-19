@@ -117,7 +117,7 @@ $\tau_2$
 \end{array}\right)
 $$
 
-##### Method 4: Constrain $\Sum \tau_i = 0$ and replace $\tau_3$ with $-\tau_1-\tau_2$ (MINITAB, SPSS, and some SAS procedures, model fit in JMP do this; R can also be made to do this)
+##### Method 4: Constrain $\sum \tau_i = 0$ and replace $\tau_3$ with $-\tau_1-\tau_2$ (MINITAB, SPSS, and some SAS procedures, model fit in JMP do this; R can also be made to do this)
 $$
 \left(\begin{array}{ccc}
 1 & 1 & 0\\
