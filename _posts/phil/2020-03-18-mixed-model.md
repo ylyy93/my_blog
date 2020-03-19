@@ -13,7 +13,7 @@ $$
 
 In general,
 * $Cov(u) = G_{b\times b}$, $Cov(\varepsilon) = R$.
-* assume (for now), $Cov(u) = \sigma_{\beta}^2I_{b\times b}$, $Cov(\varepsilon) = \sigma^2I_{n\times n}$.
+* assume (for now), $Cov(u) = \sigma_{\beta}^2 I_{b\times b}$, $Cov(\varepsilon) = \sigma^2I_{n\times n}$.
 * $Cov(Y) = \Sigma = \sigma^2_{\beta}ZZ^{\top} + \sigma^2I$.
 
 ### Split-plot model
