@@ -156,5 +156,24 @@ $$
 \end{array}\right)
 $$
 
-Parameter Interpretation:
-1.
+##### Method 6: The "Helmert" parameterization: compares each treatment level to the average of the treatment levels that follow it.
+
+$$
+\left(\begin{array}{ccc}
+1 & 2 & 0\\
+1 & 2 & 0\\
+1 & -1 & 1\\
+1 & -1 & 1\\
+1 & -1 & -1\\
+1 & -1 & -1
+\end{array}\right)
+\left(\begin{array}{c}
+\mu \\
+\tau_1 \\
+\tau_2
+\end{array}\right)
+$$
+
+* $\mu$ = Average of the three trts
+* $\tau$ = Comparison of trt1 to average of 2 and 3 (multiplied by 2)
+* $\tau$ = Comparison of trt2 average to trt3 average
