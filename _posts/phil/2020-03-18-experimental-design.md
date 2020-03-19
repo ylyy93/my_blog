@@ -283,7 +283,7 @@ F-statistic: 3.936 on 2 and 12 DF,  p-value: 0.0485
 15    0    0    1
 ```
 
-#### `options(contrasts = c("contr.treatment", "contr.poly"))`
+##### `contr.treatment` (default)
 ```
 > options(contrasts = c("contr.treatment", "contr.poly"))
 > g <- lm(drywt~trt)
@@ -304,4 +304,98 @@ F-statistic: 3.936 on 2 and 12 DF,  p-value: 0.0485
 13           1    0    1
 14           1    0    1
 15           1    0    1
+```
+
+##### `contr.SAS`
+```
+> options(contrasts = c("contr.SAS", "contr.poly"))
+> g <- lm(drywt~trt)
+> model.matrix(g)
+   (Intercept) trt1 trt2
+1            1    1    0
+2            1    1    0
+3            1    1    0
+4            1    1    0
+5            1    1    0
+6            1    0    1
+7            1    0    1
+8            1    0    1
+9            1    0    1
+10           1    0    1
+11           1    0    0
+12           1    0    0
+13           1    0    0
+14           1    0    0
+15           1    0    0
+```
+
+
+##### `contr.helmert`
+```
+> options(contrasts = c("contr.helmert", "contr.poly"))
+> g <- lm(drywt~trt)
+> model.matrix(g)
+   (Intercept) trt1 trt2
+1            1   -1   -1
+2            1   -1   -1
+3            1   -1   -1
+4            1   -1   -1
+5            1   -1   -1
+6            1    1   -1
+7            1    1   -1
+8            1    1   -1
+9            1    1   -1
+10           1    1   -1
+11           1    0    2
+12           1    0    2
+13           1    0    2
+14           1    0    2
+15           1    0    2
+```
+
+##### `contr.sum`
+```
+> options(contrasts = c("contr.sum", "contr.poly"))
+> g <- lm(drywt~trt)
+> model.matrix(g)
+   (Intercept) trt1 trt2
+1            1    1    0
+2            1    1    0
+3            1    1    0
+4            1    1    0
+5            1    1    0
+6            1    0    1
+7            1    0    1
+8            1    0    1
+9            1    0    1
+10           1    0    1
+11           1   -1   -1
+12           1   -1   -1
+13           1   -1   -1
+14           1   -1   -1
+15           1   -1   -1
+```
+
+##### Summary
+```
+> contr.treatment(3)
+  2 3
+1 0 0
+2 1 0
+3 0 1
+> contr.SAS(3)
+  1 2
+1 1 0
+2 0 1
+3 0 0
+> contr.sum(3)
+  [,1] [,2]
+1    1    0
+2    0    1
+3   -1   -1
+> contr.poly(3)
+                .L         .Q
+[1,] -7.071068e-01  0.4082483
+[2,] -7.850462e-17 -0.8164966
+[3,]  7.071068e-01  0.4082483
 ```
