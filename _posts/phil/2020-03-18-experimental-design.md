@@ -192,3 +192,26 @@ By default:
 ```r
 options(contrasts=c("","")) # set the choices for unordered and ordered factors, respectively.
 ```
+
+* Standard Choices: `contr.treatment`, `contr.SAS`, `contr.sum`, `constr.poly`, and `contr.helmert`
+* use `-1` syntax to omit intercept, then no treatment levels are omitted by the `contr.treatment`, `contr.SAS`.
+
+```
+> data1
+   trt drywt
+1    1  1.02
+2    1  0.79
+3    1  1.00
+4    1  0.59
+5    1  0.97
+6    2  1.00
+7    2  1.21
+8    2  1.22
+9    2  0.96
+10   2  0.79
+11   3  0.99
+12   3  1.36
+13   3  1.17
+14   3  1.22
+15   3  1.12
+```
