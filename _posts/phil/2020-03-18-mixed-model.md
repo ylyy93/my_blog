@@ -30,7 +30,7 @@ $$
 * $$\tau_j \sim N(0,\sigma^2_{\tau})$$
 * $$(\alpha\tau)_{ij} \sim N(0,\sigma_{\alpha\tau}^2)$$
 * $$\varepsilon_{ijk} \sim N(0,\sigma^2)$$
-* $\tau_j$, \[(\alpha\tau)_{ij}\], $\varepsilon_{ijk}$ are all independent.
+* $\tau_j$, $(\alpha\tau)_{ij}$, $\varepsilon_{ijk}$ are all independent.
 
 ##### Primary interests:
 seed trt effects, lot effects and ther interactions. (We are not interested in σ2, σ2 and σ2, except
