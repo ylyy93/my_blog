@@ -549,9 +549,10 @@ estimate 'mean again' intercept 3 trt 1 1 1/divisor=3; run;
 * `means`: simple treatment means, not adjusted anyway
 * `LSMEANS`: estimated treatment means, based on the model. (**In the oneway model they are the same as the simple means**)
 $$\hat{\mu} + \hat{\tau}_1, \hat{\mu} + \hat{\tau}_2, \hat{\mu} + \hat{\tau}_3$$
-* `estimate`: estimate of other estimable function
-* `contrast`: comparisons (contrasts) may be estimated
+* `estimate`: estimate of other estimable function and t-test
+* `contrast`: comparisons (contrasts) of treatment means (estimable function of the form $c^{\top}\beta$, $c^{\top} = (0,c_1,\ldots,c_t)$, where $\sum_{i=1}^{t}c_i = 0$)
 * `class`: factor variables
+* `clparam`: confidence limites
 * `xpx`:
 $$
 \left(\begin{array}{cc}
@@ -592,3 +593,18 @@ Which parameterization would you want to use?
 Most programs print tables of parameter estimates, se’s, t-tests, and CI’s for the parameters. It would be convenient if the questions of interest were answered by that table without the need to specify additional functions of parameters.
 
 We want to be able to easily specify comparisons of interest as functions of the parameters. That is generally easier to do if all levels of factors are treated symmetrically.
+
+#### Comparing individual treatment means in SAS
+
+* In the oneway model, all pairwise comparisons between means can be done using:
+```
+means trt /LSD;
+lsmeans trt/pdiff;
+```
+* The default output from the `means` statement when sample sizes are equal is a table that puts letters (A,B,C, etc.) next groups of means that are NOT significantly different. (Publications usually use superscript letters in tables.)
+* When sample sizes are NOT equal, the default output from the `means` statement is a set of confidence intervals for the difference between every pair of means.
+* The `lsmeans` statement output is a table that gives a p-value for the test of the difference between each pair of means.
+* In SAS the `means` statement defaults can be overridden: The `lines` option forces the letter display, whether sample sizes are equal or not. All means are compared as if they had the same "average" (harmonic mean) value of r. The `cldiff` option forces the confidence intervals display.
+* For the oneway model, the `means` and the `lsmeans` are numerically the same.
+* LSD methods are subject to the "multiple testing problem" that we will discuss
+extensively in the next lecture. (The "Tukey" method is a common approach to this problem, but there are others.)
