@@ -92,4 +92,12 @@ $\varepsilon_{ij}\sim N(0,\sigma^2)$ i.i.d.
 
 Each variety has its own random regression line, which centers around the average regression line.
 
-###
+### The two-factor "Repeated Measures" model
+Assume 2r subjects are randomly split between a=2 treatment groups, r=3
+subjects per group. Each subject is measured sequentially over b=6 time periods.
+
+* $y_{ijk}$: $i=1,2$ (trt), $j=1,\ldots,r$ (subject within trt), $k=1,\ldots,6$ (period)
+
+$$
+y_{ijk} = 
+$$
