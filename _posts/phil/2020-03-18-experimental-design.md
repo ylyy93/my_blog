@@ -522,7 +522,37 @@ run;
 
 SAS picks a particular g-inverse such that the last treatment effect parameter is zero. When there are three treatment levels.
 
-$$\hat{\beta}=(X^{})^{-}$$
+$$\hat{\beta}=(X^{\top}X)^{-}X^{\top}y$$
+
+$$(X^{\top}X)^{-} = \left(\begin{array}{cc}
+(W^{\top}W)^{-1}_{3\times 3} & 0_{3\times 1}\\
+0_{1\times 3} & 0_{1\times 1}
+\end{array}\right)
+$$
+
+##### Proc GLM options/statements
+* `solution`: parameter estimates
+* `predicted`: predicted values for the model
+* `means`: simple treatment means, not adjusted anyway
+* `LSMEANS`: estimated treatment means, based on the model. (**In the oneway model they are the same as the simple means**)
+$$\hat{\mu} + \hat{\tau}_1, \hat{\mu} + \hat{\tau}_2, \hat{\mu} + \hat{\tau}_3$$
+* `estimate`: estimate of other estimable function
+* `contrast`: comparisons (contrasts) may be estimated
+* `class`: factor variables
+* `xpx`:
+$$
+\left(\begin{array}{cc}
+X'X & X'Y\\
+Y'X & Y'Y
+\end{array}\right)
+$$
+* `xpx` + `I`:
+$$
+\left(\begin{array}{cc}
+(X'X)^{-} & (X'X)^{-}X'Y\\
+Y'X(X'X)^{-} & Y'Y - Y'X(X'X)^{-}X'Y
+\end{array}\right)
+$$
 
 ### The Gauss-Markov Theorem
 If $l_{p\times 1}^{\top} \beta= l_1\beta_1 + \ldots + l_p\beta_p$ is an "estimable" function of $\beta$, then:
