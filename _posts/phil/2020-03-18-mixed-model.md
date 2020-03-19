@@ -32,6 +32,7 @@ $$
 * $$\varepsilon_{ijk} \sim N(0,\sigma^2)$$
 * $\tau_j$, $(\alpha\tau)_{ij}$, $\varepsilon_{ijk}$ are all independent.
 
+
 ##### Primary interests:
 seed trt effects, lot effects and ther interactions. (We are not interested in σ2, σ2 and σ2, except
 as they relate to precission of fixed effect estimates.)
@@ -104,3 +105,24 @@ $$
 * $\mu$, $\alpha_i$, $\tau_k$, $(\alpha\tau)_{ik}$ are fixed effects.
 * $\beta_{j(i)} \sim N(0,\sigma^2_{\beta(\alpha)})$
 * $\beta_{j(i)}$ independent of the $\varepsilon_{ijk}$, but $\varepsilon_{ijk}$ are not independent of each other.
+
+##### AR(1)
+
+$$ Cov
+\left(\begin{array}{c}
+\varepsilon_{ij1} \\
+\varepsilon_{ij2} \\
+\varepsilon_{ij3} \\
+\varepsilon_{ij4} \\
+\varepsilon_{ij5} \\
+\varepsilon_{ij6}
+\end{array}\right) =
+\left(\begin{array}{c}
+      \sigma^2 & \rho^1\sigma^2 & \rho^2\sigma^2 & \rho^3\sigma^2 & \rho^4\sigma^2 & \rho^5\sigma^2 \\
+\rho^1\sigma^2 &       \sigma^2 & \rho^1\sigma^2 & \rho^2\sigma^2 & \rho^3\sigma^2 & \rho^4\sigma^2 \\
+\rho^2\sigma^2 & \rho^1\sigma^2 &       \sigma^2 & \rho^1\sigma^2 & \rho^2\sigma^2 & \rho^3\sigma^2 \\
+\rho^3\sigma^2 & \rho^2\sigma^2 & \rho^1\sigma^2 &       \sigma^2 & \rho^1\sigma^2 & \rho^2\sigma^2 \\
+\rho^4\sigma^2 & \rho^3\sigma^2 & \rho^2\sigma^2 & \rho^1\sigma^2 &       \sigma^2 & \rho^1\sigma^2 \\
+\rho^5\sigma^2 & \rho^4\sigma^2 & \rho^3\sigma^2 & \rho^2\sigma^2 & \rho^1\sigma^2 &       \sigma^2  
+\end{array}\right)
+$$
