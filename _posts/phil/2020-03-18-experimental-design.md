@@ -509,3 +509,13 @@ P value adjustment method: none
 estimate    lower    upper
   -0.230   -0.431   -0.029
 ```
+
+### What does SAS do?
+SAS `Proc GLM`, `Proc MIXED`, and `Proc GLIMMIX` keep the original effects parameterization design matrix (4 parameters in the three-group oneway) , X is not full rank). SAS uses a particular generalized inverse that solves the normal equations.
+
+```
+proc glm data=geranium;
+class trt;
+model drywt=trt/solution clparm;
+run;
+```
