@@ -520,8 +520,14 @@ model drywt=trt/solution clparm;
 run;
 ```
 
+SAS picks a particular g-inverse such that the last treatment effect parameter is zero. When there are three treatment levels.
+
+$$\hat{\beta}=(X^{})^{-}$$
+
 ### The Gauss-Markov Theorem
 If $l_{p\times 1}^{\top} \beta= l_1\beta_1 + \ldots + l_p\beta_p$ is an "estimable" function of $\beta$, then:
 
-1. $l^{\top}\hat{\beta}$ is unique, i.e., the same for any choice of ${X^{\top}X}^{-}$.
+1. $l^{\top}\hat{\beta}$ is unique, i.e., the same for any choice of $(X^{\top}X)^{-}$.
 2. $l^{\top}\hat{\beta}$ has minimum variance among linear unbiased estimators of $l^{\top}\beta$.
+
+**In the Oneway model any sum or comparison of treatment means is estimable!**
