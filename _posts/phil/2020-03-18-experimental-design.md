@@ -138,3 +138,23 @@ $\mu$ is the average of the three true trt means,
 the $\tau$'s are the deviations of the individual trt means
 from the average of the trt means.
 (This is called the "sum-to-zero" parameterization)
+
+##### Method 5: “Orthogonal Polynomials”: (R default for ordinal predictors)
+$$
+\left(\begin{array}{ccc}
+1 & -1 & 1\\
+1 & -1 & 1\\
+1 & 0 & -2\\
+1 & 0 & -2\\
+1 & 1 & 1\\
+1 & 1 & 1
+\end{array}\right)
+\left(\begin{array}{c}
+$\mu$ \\
+$\tau_1$ \\
+$\tau_2$
+\end{array}\right)
+$$
+
+Parameter Interpretation:
+1. 
