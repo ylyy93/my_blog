@@ -51,3 +51,11 @@ Studies in which the experimenter **observes or measures**, but doesn’t manipu
 Randomization made the estimate of treatment effect unbiased.
 
 (R. A. Fisher, 1935): Randomization does not make error terms independent, but randomization allows us to do a valid “randomization test”. The normal analysis that assumes, independent errors is generally a good approximation to the randomization test.
+
+# L2: The Oneway Model
+
+### Motivating Example: The Geranium Data
+
+Fifteen pots (one plant per pot) randomly assigned three trts (A, B, C), without restriction “Completely Randomized Design” (CRD). Five pots per trt.
+
+$Y_{ij} = \mu + \tau_i + \varepsilon_{ij}$
