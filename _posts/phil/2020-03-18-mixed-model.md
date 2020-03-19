@@ -28,7 +28,7 @@ $$
 * $i=1,\ldots,a=4$ (lot), $j=1,\ldots,r=4$ (block), $k=1,\ldots,b=4$ (seed trt)
 * $\mu, \alpha_i, \beta_k$ and $(\alpha\beta)_{ik}$ are fixed effects
 * $\tau_j \sim N(0,\sigma^2_{\tau})$
-* $(\alpha \tau)_{ij} \sim N(0,\sigma_{\alpha\tau}^2)$
+* $$(\alpha\tau)_{ij} \sim N(0,\sigma_{\alpha\tau}^2)$$
 * $\varepsilon_{ijk} \sim N(0,\sigma^2)$
 * $\tau_j$, $(\alpha \tau)_{ij}$, $\varepsilon_{ijk}$ are all independent.
 
@@ -50,7 +50,7 @@ $$
 * $i=1,\ldots,a$ (level of A), $j=1,\ldots,r$ (block), $k=1,\ldots,b$ (level of B), $l=1,\ldots,c$ (level of C).
 * $\mu$, $\alpha_i$, $\beta_k$, $(\alpha\beta)_{ik}$, $\gamma_l$, $(\alpha\gamma)_{il}$, $(\beta\gamma)_{kl}$, $(\alpha\beta\gamma)_{ikl}$ are fixed effects.
 * $\tau_j \sim N(0,\sigma^2_{\tau})$
-* $(\alpha\tau)_{ij} \sim N(0,\sigma^2_{\alpha\tau})$
+* #$(\alpha\tau)_{ij} \sim N(0,\sigma^2_{\alpha\tau})$$s
 * $(\alpha\beta\tau)_{ijk} \sim N(0,\sigma^2_{\alpha\beta\tau})$
 * $\varepsilon_{ijkl} \sim N(0,\sigma^2)$
 * $\tau_j$, $(\alpha\tau)_{ij}$, $(\alpha\beta\tau)_{ijk}$, $\varepsilon_{ijkl}$ are all independent.
