@@ -62,6 +62,7 @@ $$Y_{ij} = \mu + \tau_i + \varepsilon_{ij}.$$
 
 ##### Method 1:  Omit the intercept ($\mu$) and use the "means" parameterization of the same model, relabeling the $\tau$'s as $\mu$'s:
 The parameters are treatment means.
+
 $$
 \left(\begin{array}{ccc}
 1 & 0 & 0\\
@@ -81,6 +82,7 @@ $$
 ##### Method 2: Omit the first of the "effects" columns (the R lm function default):
 * $\mu$ is the mean for trt 1
 * the $\tau$'s are the deviations of the other trt means from the trt 1 mean.
+
 $$
 \left(\begin{array}{ccc}
 1 & 0 & 0\\
@@ -118,6 +120,7 @@ $$
 $$
 
 ##### Method 4: Constrain $\sum \tau_i = 0$ and replace $\tau_3$ with $-\tau_1-\tau_2$ (MINITAB, SPSS, and some SAS procedures, model fit in JMP do this; R can also be made to do this)
+
 $$
 \left(\begin{array}{ccc}
 1 & 1 & 0\\
@@ -134,12 +137,12 @@ $$
 \end{array}\right)
 $$
 
-$\mu$ is the average of the three true trt means,
-the $\tau$'s are the deviations of the individual trt means
-from the average of the trt means.
+* $\mu$ is the average of the three true trt means,
+* the $\tau$'s are the deviations of the individual trt means from the average of the trt means.
 (This is called the "sum-to-zero" parameterization)
 
 ##### Method 5: “Orthogonal Polynomials”: (R default for ordinal predictors)
+
 $$
 \left(\begin{array}{ccc}
 1 & -1 & 1\\
@@ -177,3 +180,9 @@ $$
 * $\mu$ = Average of the three trts
 * $\tau$ = Comparison of trt1 to average of 2 and 3 (multiplied by 2)
 * $\tau$ = Comparison of trt2 average to trt3 average
+
+### What does the `lm` function in R do?
+
+By default:
+(1) For unordered “factor” variables (called "class" variables in SAS) lm uses the "treatment" parameterization (Method 2), which leaves out the column associated with the first (alphabetically) of the factor levels.
+(2) For ordered factor variables lm uses the "poly" set of orthogonal polynomial contrasts (Method 5, but each column multiplied by a constant).
