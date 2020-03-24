@@ -215,3 +215,14 @@ PBmodcomp(h,k, nsim=10000)
 4. Follow the `lmer` function with functions in `multcomp`, `lsmeans`, and `lmerTest` packages to test effects and compare treatments. `lmerTest` and `lsmeans` have options to call the `pbkrtest` package to do the `Kenward-Roger` approximation, which is recommended.
 5. I use the `KRmodcomp` in the `pbkrtest` package to compare models.
 6. The `lme` funtion in the old `nlme` package fits mixed models, but it is very awkward for blocked designs. However, it has “containment” method F-tests. Also, `lme4` does not allow correlated errors, which become important later in the “repeated measures” designs.
+
+# L3: Random Effects One-way and Introduction to BLUPs
+
+$$
+Y_{ij} = \mu + \alpha_i + \varepsilon_{ij}
+$$
+* $i=1,\ldots,t$ (grasses), $j=1,\ldots,r$ (tillers)
+
+Example 1: Select t grass samples from a large area. We have the idea that each sample represents a genotype that exists in that area. Select r tillers from each sample, and measure chlorophyll content on each tiller. Consider the one-factor model.
+
+In this example, we are not interested in these particular the $\alpha$'s. We are interested in the population from which they came. We want to know the variance of that population.
