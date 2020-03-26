@@ -9,7 +9,7 @@ tags: [Python]
 - [Python 3 - Object Oriented](https://www.tutorialspoint.com/python3/python_classes_objects.htm)
 
 ## Creating Classes
-```python3
+```python
 class Employee:
    'Common base class for all employees'
    empCount = 0
