@@ -82,6 +82,15 @@ Every Python class keeps following built-in attributes and they can be accessed 
   * **__doc__** − Class documentation string or none, if undefined.
   * **__module__** − Module name in which the class is defined. This attribute is "__main__" in interactive mode.
 
+* Use `.__dict__.keys()` to access all the attributes.
+* Or pretty print using `pprint`
+
+```python
+import pprint
+pprint.pprint(dictionary.__dict__,depth=1,width=60)
+pprint.pprint(dictionary.token2id,depth=1,width=60)
+```
+
 ```python
 print ("Employee.__doc__:", Employee.__doc__)
 print ("Employee.__name__:", Employee.__name__)
