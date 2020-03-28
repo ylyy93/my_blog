@@ -84,6 +84,8 @@ Every Python class keeps following built-in attributes and they can be accessed 
 
 * Use `.__dict__.keys()` to access all the attributes.
 * Or pretty print using `pprint`
+* Use `dir(obj)` to list all the methods
+
 
 ```python
 import pprint
