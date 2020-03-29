@@ -78,9 +78,26 @@ After deleting value at index 2 :  ['physics', 'chemistry', 2000]
 
 ## Indexing, Slicing and Matrices
 ```python
-L = ['C++'', 'Java', 'Python']
+L = ['C++', 'Java', 'Python']
 ```
 
 * `L[2]`: 'Python'
 * `L[-2]`: 'Java'
-* `L[1:]`: ['Java','Python']
+* `L[1:]`: `['Java','Python']`
+
+## Build-in List Functions and Methods
+
+* `len(list)`
+* `max(list)`
+* `min(list)`
+* `list(seq)`: Converts a tuple into list.
+
+* `list.append(obj)`
+* `list.count(obj)`: Returns count of how many times obj occurs in list
+* `list.extend(seq)`: Appends the contents of seq to list
+* `list.index(obj)`: Returns the lowest index in list that obj appears
+* `list.insert(index, obj)`: Inserts object obj into list at offset index
+* `list.pop(obj=list[-1])`: Removes and returns last object or obj from list
+* `list.remove(obj)`: Removes object obj from list
+* `list.reverse()`: Reverse objects of list in place
+* `list.sort([func])`: Sorts objects of list, use compare func if given
