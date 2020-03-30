@@ -6,4 +6,4 @@ categories: Statistics
 tags: [Machine Learning, Python, NLP]
 ---
 
-![notebook](https://ylyy93.github.io/my_blog/assets/posts/kaggle/topic-modeling-finding-related-articles.html)
+- [notebook](https://ylyy93.github.io/my_blog/assets/posts/kaggle/topic-modeling-finding-related-articles.html)
