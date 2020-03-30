@@ -3,7 +3,7 @@ layout: post
 title: Kaggle - COVID-19 NLP
 date: 2020-03-29 18:43 -0700
 categories: Statistics
-tags: [Machine Learning, Python]
+tags: [Machine Learning, Python, NLP]
 ---
 
 ## Preliminary
