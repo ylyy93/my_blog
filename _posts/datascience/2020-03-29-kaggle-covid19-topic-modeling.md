@@ -22,7 +22,7 @@ Please refer to the [notebook](https://ylyy93.github.io/my_blog/assets/posts/kag
 
 - [Latent Dirichlet Allocation](http://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf)
 
-## Preprocessing - Generate $M\times V$ Dummy Matrix (Input for LDA)
+## Step 1: Preprocessing - Generate $M\times V$ Dummy Matrix (Input for LDA)
 For preprocessing we use [scispaCy](https://allenai.github.io/scispacy/), which is a Python package containing [spaCy](https://spacy.io) models (Industrial-Strength Natural Language Processing in Python) for processing biomedical, scientific or clinical text.
 
 ```python
@@ -73,13 +73,13 @@ word_count = pd.DataFrame({'word': vectorizer.get_feature_names(), 'count': np.a
 word_count.sort_values('count', ascending=False).set_index('word')[:20].sort_values('count', ascending=True).plot(kind='barh')
 ```
 
-## LDA
+## Step 2:  LDA fitting
 ```python
 lda = LatentDirichletAllocation(n_components=50, random_state=0) # K = 50 (# topics)
 lda.fit(data_vectorized)
 ```
 
-## Results
+## Step 3:  Results and Applications
 
 ### Topic Discovery
 ```python
