@@ -66,3 +66,6 @@ docker rmi 4a33d1e8acbf
 docker rmi $(docker images | grep "<none>" | awk '{print $3}') # delete all untagged images
 docker rmi $(docker images | awk '{print $3}') # delete all images
 ```
+
+### Reference
+- [Dockerize your Python Application](https://runnable.com/docker/python/dockerize-your-python-application)
