@@ -7,78 +7,88 @@ tags: [Python, CNN]
 ---
 
 ## Some facts
-* Encoder-decoder architecture 
+* Encoder-decoder architecture
 * UNet is able to do image localisation by predicting the image pixel by pixel
 * strong enough to do good prediction based on even few data sets by using excessive data augmentation techniques.
 * input and output share the same size.
 
 ## Implementation
 ```python
-from keras.layers import Input, Conv2D, Conv2DTranspose, MaxPooling2D, concatenate, Dropout
+import numpy as np
+import os
+import skimage.io as io
+import skimage.transform as trans
+import numpy as np
+from keras.models import *
+from keras.layers import *
+from keras.optimizers import *
+from keras.callbacks import ModelCheckpoint, LearningRateScheduler
+from keras import backend as keras
+
+
+def unet(pretrained_weights = None,input_size = (572,572,1)):
+    inputs = Input(input_size)
+
+    conv1 = Conv2D(64, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(inputs)
+    conv1 = Conv2D(64, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv1)
+    pool1 = MaxPooling2D(pool_size=(2, 2))(conv1)
+
+    conv2 = Conv2D(128, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(pool1)
+    conv2 = Conv2D(128, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv2)
+    pool2 = MaxPooling2D(pool_size=(2, 2))(conv2)
+
+    conv3 = Conv2D(256, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(pool2)
+    conv3 = Conv2D(256, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv3)
+    pool3 = MaxPooling2D(pool_size=(2, 2))(conv3)
+
+    conv4 = Conv2D(512, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(pool3)
+    conv4 = Conv2D(512, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv4)
+    drop4 = Dropout(0.5)(conv4)
+    pool4 = MaxPooling2D(pool_size=(2, 2))(drop4)
+
+    conv5 = Conv2D(1024, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(pool4)
+    conv5 = Conv2D(1024, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv5)
+    drop5 = Dropout(0.5)(conv5)
+
+    up6 = Conv2D(512, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(drop5))
+    merge6 = concatenate([drop4,up6], axis = 3)
+    conv6 = Conv2D(512, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge6)
+    conv6 = Conv2D(512, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv6)
+
+    up7 = Conv2D(256, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(conv6))
+    merge7 = concatenate([conv3,up7], axis = 3)
+    conv7 = Conv2D(256, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge7)
+    conv7 = Conv2D(256, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv7)
+
+    up8 = Conv2D(128, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(conv7))
+    merge8 = concatenate([conv2,up8], axis = 3)
+    conv8 = Conv2D(128, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge8)
+    conv8 = Conv2D(128, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv8)
+
+    up9 = Conv2D(64, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(conv8))
+    merge9 = concatenate([conv1,up9], axis = 3)
+    conv9 = Conv2D(64, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge9)
+    conv9 = Conv2D(64, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv9)
+    conv9 = Conv2D(2, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv9)
+    conv10 = Conv2D(1, 1, activation = 'sigmoid')(conv9)
+
+    model = Model(input = inputs, output = conv10)
+
+    model.compile(optimizer = Adam(lr = 1e-4), loss = 'binary_crossentropy', metrics = ['accuracy'])
+
+    #model.summary()
+
+    if(pretrained_weights):
+    	model.load_weights(pretrained_weights)
+
+    return model
+
 ```
 
-
-```python
-def build_model(input_layer, start_neurons):
-    conv1 = Conv2D(start_neurons * 1, (3, 3), activation="relu", padding="same")(input_layer)
-    conv1 = Conv2D(start_neurons * 1, (3, 3), activation="relu", padding="same")(conv1)
-    pool1 = MaxPooling2D((2, 2))(conv1)
-    pool1 = Dropout(0.25)(pool1)
-
-    conv2 = Conv2D(start_neurons * 2, (3, 3), activation="relu", padding="same")(pool1)
-    conv2 = Conv2D(start_neurons * 2, (3, 3), activation="relu", padding="same")(conv2)
-    pool2 = MaxPooling2D((2, 2))(conv2)
-    pool2 = Dropout(0.5)(pool2)
-
-    conv3 = Conv2D(start_neurons * 4, (3, 3), activation="relu", padding="same")(pool2)
-    conv3 = Conv2D(start_neurons * 4, (3, 3), activation="relu", padding="same")(conv3)
-    pool3 = MaxPooling2D((2, 2))(conv3)
-    pool3 = Dropout(0.5)(pool3)
-
-    conv4 = Conv2D(start_neurons * 8, (3, 3), activation="relu", padding="same")(pool3)
-    conv4 = Conv2D(start_neurons * 8, (3, 3), activation="relu", padding="same")(conv4)
-    pool4 = MaxPooling2D((2, 2))(conv4)
-    pool4 = Dropout(0.5)(pool4)
-
-    # Middle
-    convm = Conv2D(start_neurons * 16, (3, 3), activation="relu", padding="same")(pool4)
-    convm = Conv2D(start_neurons * 16, (3, 3), activation="relu", padding="same")(convm)
-
-    deconv4 = Conv2DTranspose(start_neurons * 8, (3, 3), strides=(2, 2), padding="same")(convm)
-    uconv4 = concatenate([deconv4, conv4])
-    uconv4 = Dropout(0.5)(uconv4)
-    uconv4 = Conv2D(start_neurons * 8, (3, 3), activation="relu", padding="same")(uconv4)
-    uconv4 = Conv2D(start_neurons * 8, (3, 3), activation="relu", padding="same")(uconv4)
-
-    deconv3 = Conv2DTranspose(start_neurons * 4, (3, 3), strides=(2, 2), padding="same")(uconv4)
-    uconv3 = concatenate([deconv3, conv3])
-    uconv3 = Dropout(0.5)(uconv3)
-    uconv3 = Conv2D(start_neurons * 4, (3, 3), activation="relu", padding="same")(uconv3)
-    uconv3 = Conv2D(start_neurons * 4, (3, 3), activation="relu", padding="same")(uconv3)
-
-    deconv2 = Conv2DTranspose(start_neurons * 2, (3, 3), strides=(2, 2), padding="same")(uconv3)
-    uconv2 = concatenate([deconv2, conv2])
-    uconv2 = Dropout(0.5)(uconv2)
-    uconv2 = Conv2D(start_neurons * 2, (3, 3), activation="relu", padding="same")(uconv2)
-    uconv2 = Conv2D(start_neurons * 2, (3, 3), activation="relu", padding="same")(uconv2)
-
-    deconv1 = Conv2DTranspose(start_neurons * 1, (3, 3), strides=(2, 2), padding="same")(uconv2)
-    uconv1 = concatenate([deconv1, conv1])
-    uconv1 = Dropout(0.5)(uconv1)
-    uconv1 = Conv2D(start_neurons * 1, (3, 3), activation="relu", padding="same")(uconv1)
-    uconv1 = Conv2D(start_neurons * 1, (3, 3), activation="relu", padding="same")(uconv1)
-
-    output_layer = Conv2D(1, (1,1), padding="same", activation="sigmoid")(uconv1)
-
-    return output_layer
-
-input_layer = Input((img_size_target, img_size_target, 1))
-output_layer = build_model(input_layer, 16)
-
-```
 
 
 ## Reference
 
+- [Implementation of deep learning framework -- Unet, using Keras](https://github.com/zhixuhao/unet)
 - [UNet — Line by Line Explanation](https://towardsdatascience.com/unet-line-by-line-explanation-9b191c76baf5)
 - [U-net, dropout, augmentation, stratification](https://www.kaggle.com/phoenigs/u-net-dropout-augmentation-stratification)
