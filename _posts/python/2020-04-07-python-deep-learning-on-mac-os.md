@@ -57,7 +57,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 ```bash
 source ~/.bash_profile
-mkvirtualenv dl4cv -p python3
+mkvirtualenv dl4cv -p /usr/local/bin/python3.7
 workon dl4cv
 ```
 
@@ -108,3 +108,16 @@ pip install tensorflow
 pip install keras
 pip install dlib
 ```
+
+## Other Issues
+
+### Remove virtualenv
+```
+deactivate ENVNAME
+rmvirtualenv ENVNAME
+```
+
+## References
+
+- [Deep Learning on MacOS Catalina](https://mc.ai/deep-learning-on-macos-catalina/)
+- [macOS for deep learning with Python, TensorFlow, and Keras](https://www.pyimagesearch.com/2017/09/29/macos-for-deep-learning-with-python-tensorflow-and-keras/)
