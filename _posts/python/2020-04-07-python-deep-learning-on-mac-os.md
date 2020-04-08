@@ -110,6 +110,14 @@ pip install keras
 pip install dlib
 ```
 
+## 8. Check
+
+```python
+import cv2
+cv2.__version__
+
+import keras
+```
 ## Other Issues
 
 ### Remove virtualenv
@@ -117,6 +125,18 @@ pip install dlib
 deactivate ENVNAME
 rmvirtualenv ENVNAME
 ```
+
+## Remove Python from MAC OS
+```bash
+sudo rm -rf /Library/Frameworks/Python.framework/Versions/3.7
+sudo rm -rf "/Applications/Python 3.7"
+ls -l /usr/local/bin | grep '../Library/Frameworks/Python.framework/Versions/3.7'
+cd /usr/local/bin/
+ls -l /usr/local/bin | grep '../Library/Frameworks/Python.framework/Versions/3.7' | awk '{print $9}' | tr -d @ | xargs rm
+
+```
+
+- [HOW TO COMPLETELY UNINSTALL PYTHON ON MAC OS?](https://huybien.com/how-to-completely-uninstall-python-on-mac-os/)
 
 ## References
 
