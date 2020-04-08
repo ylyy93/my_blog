@@ -56,8 +56,8 @@ source /usr/local/bin/virtualenvwrapper.sh
 ```
 
 ```bash
-source ~/.bash_profile
-mkvirtualenv dl4cv -p /usr/local/bin/python3.7
+source ~/.bashrc
+mkvirtualenv dl4cv -p python3
 workon dl4cv
 ```
 
@@ -91,6 +91,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 ```bash
 make -j4
 sudo make install
+cd ~/.virtualenvs/dl4cv/lib/python3.7/site-packages
 ln -s /usr/local/lib/python3.7/site-packages/cv2/python-3.7/cv2.cpython-37m-darwin.so cv2.so
 ```
 
