@@ -10,3 +10,4 @@ tags: [Python]
 ## References
 
 - [Your Starter Notebook for OSIC!](https://www.kaggle.com/twinkle0705/your-starter-notebook-for-osic)
+- [DICOM Basic Preprocessing and Visualization](https://www.kaggle.com/danpresil1/dicom-basic-preprocessing-and-visualization)

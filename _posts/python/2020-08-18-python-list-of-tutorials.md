@@ -2,6 +2,8 @@
 layout: post
 title: Python -- List of Tutorials
 date: 2020-08-18 12:28 -0700
+categories: Coding
+tags: [Python]
 ---
 
 ## Lists
